@@ -2,12 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
 import multer from 'multer';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -28,8 +23,10 @@ if (API_KEY) {
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// ─── Serve static files from /public ────────────────────────────────────────
-app.use(express.static(path.join(__dirname, 'public')));
+// ─── Static files (local dev only) ──────────────────────────────────────────
+if (process.env.NODE_ENV !== 'production') {
+  app.use(express.static(path.join(process.cwd(), 'public')));
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 //  HELPERS
@@ -450,10 +447,12 @@ app.post('/api/refine-prompt', async (req, res) => {
 
 app.get('/api/model-status', (_, res) => res.json({ model: global.WORKING_MODEL || MODEL, status: 'online' }));
 
-// ─── Catch-all: serve index.html for all other routes ───────────────────────
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// ─── Catch-all: serve index.html for local dev ───────────────────────
+if (process.env.NODE_ENV !== 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+  });
+}
 
 // ─── Server (local dev only — Vercel ignores this) ──────────────────────────
 const PORT = process.env.PORT || 3001;
