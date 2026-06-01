@@ -279,9 +279,10 @@ app.post('/api/chat', upload.single('image'), async (req, res) => {
         try {
           const payload = {
             systemInstruction: {
-              parts: [{ text: "Kamu adalah YAFAO AI Support, asisten kecerdasan buatan super canggih milik Yafao. Jawablah semua pertanyaan dengan profesional, akurat, dan ramah dalam bahasa Indonesia. Saat ini adalah tahun 2026." }]
+              parts: [{ text: "Kamu adalah YAFAO AI Support, asisten kecerdasan buatan super canggih milik Yafao. Jawablah semua pertanyaan dengan profesional, akurat, dan ramah dalam bahasa Indonesia. Saat ini adalah tahun 2026. FAKTA TERKINI: Presiden Amerika Serikat saat ini adalah Donald Trump. Presiden Republik Indonesia saat ini adalah Prabowo Subianto." }]
             },
-            contents: contents
+            contents: contents,
+            tools: [{ googleSearch: {} }]
           };
 
           const url = `https://generativelanguage.googleapis.com/${version}/models/${m}:generateContent?key=${API_KEY}`;
