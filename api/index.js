@@ -9,7 +9,7 @@ const app = express();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
 const API_KEY = process.env.GEMINI_API_KEY;
-const MODEL   = process.env.MODEL || 'gemini-1.5-flash';
+const MODEL   = process.env.MODEL || 'gemini-2.5-flash';
 
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 async function geminiText(prompt) {
-  const models = [MODEL, 'gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-1.0-pro'];
+  const models = [MODEL, 'gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-1.5-flash'];
   let lastError = null;
   for (const m of models) {
     if (!m) continue;
@@ -126,7 +126,7 @@ app.post('/api/chat', upload.single('image'), async (req, res) => {
       contents[contents.length - 1].parts.push({ inline_data: { mime_type: req.file.mimetype, data: b64 } });
     }
     let data; let success = false;
-    for (const m of [MODEL, 'gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro']) {
+    for (const m of [MODEL, 'gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-1.5-flash']) {
       if (!m) continue;
       for (const version of ['v1beta', 'v1']) {
         try {
