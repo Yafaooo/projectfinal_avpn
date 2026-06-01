@@ -191,7 +191,16 @@ function initChatLogic() {
 
         if (!hasStartedChat) {
             hasStartedChat = true;
-            document.body.classList.add('state-chat');
+            // Animate hero out first, then switch state
+            const hero = document.getElementById('hero-section');
+            if (hero) {
+                hero.classList.add('fade-out');
+                setTimeout(() => {
+                    document.body.classList.add('state-chat');
+                }, 420);
+            } else {
+                document.body.classList.add('state-chat');
+            }
         }
 
         let imgUrl = currentFile ? URL.createObjectURL(currentFile) : null;
@@ -236,6 +245,11 @@ function initChatLogic() {
         chatHistory = [];
         hasStartedChat = false;
         document.body.classList.remove('state-chat');
+        // Restore hero section with fade-in
+        const hero = document.getElementById('hero-section');
+        if (hero) {
+            hero.classList.remove('fade-out');
+        }
         document.getElementById('action-menu').classList.remove('show');
         toast('Riwayat obrolan dibersihkan');
     });

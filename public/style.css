@@ -256,7 +256,17 @@ body {
 .hero-chip i { font-size: 11px; }
 
 /* State transition */
-.state-chat .hero-section { transform: translateY(-50px) scale(0.95); opacity: 0; pointer-events: none; position: absolute; }
+.hero-section {
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero-section.fade-out {
+  opacity: 0;
+  transform: translateY(-24px);
+  pointer-events: none;
+}
+.state-chat .hero-section { display: none !important; }
 .state-chat .main-stage { justify-content: flex-end; }
 
 /* ─── CHAT ─── */
