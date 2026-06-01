@@ -145,7 +145,7 @@ app.post('/api/chat', upload.single('image'), async (req, res) => {
       }
       if (success) break;
     }
-    if (!success) throw new Error('All Chat models failed.');
+    if (!success) throw new Error((data && data.error && data.error.message) ? data.error.message : 'All Chat models failed.');
     res.json({ result: data.candidates[0].content.parts[0].text, conversation });
   } catch (e) {
     res.status(500).json({ error: 'Chat system unavailable.', details: e.message });
