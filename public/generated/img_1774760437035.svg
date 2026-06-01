@@ -1,0 +1,276 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Filters for general realism, depth of field, fur texture, and lighting -->
+    <filter id="blurLight" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blurOut"/>
+      <feComponentTransfer in="blurOut">
+        <feFuncA type="linear" slope="0.7"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+    <filter id="deepBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15"/>
+    </filter>
+    <filter id="furTexture" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2" result="light">
+        <fePointLight x="50" y="50" z="50"/>
+      </feDiffuseLighting>
+      <feComposite in="SourceGraphic" in2="light" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+    <filter id="furGloss" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="2" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="1" result="diffuse">
+        <fePointLight x="100" y="100" z="200"/>
+      </feDiffuseLighting>
+      <feComposite in="SourceGraphic" in2="diffuse" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      <feSpecularLighting in="noise" specularExponent="20" specularConstant="0.8" lighting-color="#fff" result="specular">
+        <fePointLight x="100" y="100" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="SourceGraphic" in2="specular" operator="arithmetic" k1="0" k2="1" k3="1" k4="0.1"/>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.8"/>
+      </feComponentTransfer>
+    </filter>
+
+    <!-- Gradients for fur colors -->
+    <linearGradient id="furGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0f0f0"/>
+      <stop offset="30%" stop-color="#d0d0d0"/>
+      <stop offset="70%" stop-color="#a0a0a0"/>
+      <stop offset="100%" stop-color="#808080"/>
+    </linearGradient>
+    <linearGradient id="furGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#c0c0c0"/>
+    </linearGradient>
+    <linearGradient id="darkFurGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#404040"/>
+      <stop offset="50%" stop-color="#202020"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+    <radialGradient id="eyeBlueGradient" cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
+      <stop offset="0%" stop-color="#99CCFF"/>
+      <stop offset="30%" stop-color="#6699FF"/>
+      <stop offset="60%" stop-color="#3366CC"/>
+      <stop offset="100%" stop-color="#003366"/>
+    </radialGradient>
+    <radialGradient id="eyeBrownGradient" cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
+      <stop offset="0%" stop-color="#F2D2BD"/>
+      <stop offset="30%" stop-color="#B38D6F"/>
+      <stop offset="60%" stop-color="#8C5C38"/>
+      <stop offset="100%" stop-color="#59341B"/>
+    </radialGradient>
+    <radialGradient id="noseGradient" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="60%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="snowBackGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e0f0f8"/>
+      <stop offset="100%" stop-color="#b0d8e8"/>
+    </linearGradient>
+    <linearGradient id="snowGroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fcfd"/>
+      <stop offset="50%" stop-color="#e8f0f2"/>
+      <stop offset="100%" stop-color="#d8e4e6"/>
+    </linearGradient>
+    <radialGradient id="snowGlowGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.7)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background Snow and Sky (Deep Blur) -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#snowBackGradient)"/>
+  <circle cx="512" cy="150" r="800" fill="url(#snowGroundGradient)" filter="url(#deepBlur)"/>
+  <g filter="url(#deepBlur)">
+    <path d="M0 600 Q 256 550 512 600 T 1024 650 V 1024 H 0 Z" fill="#c4dce0" opacity="0.6"/>
+    <path d="M0 650 Q 256 600 512 650 T 1024 700 V 1024 H 0 Z" fill="#b4d2d8" opacity="0.6"/>
+  </g>
+
+  <!-- Volumetric Snow Haze / Light Rays -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#snowGlowGradient)" opacity="0.1" transform="rotate(10 512 512)"/>
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#snowGlowGradient)" opacity="0.05" transform="rotate(-5 512 512)"/>
+  <g opacity="0.3" filter="url(#softBlur)">
+    <circle cx="200" cy="800" r="150" fill="#e0f0f8"/>
+    <circle cx="800" cy="700" r="200" fill="#e0f0f8"/>
+  </g>
+
+  <!-- Husky Head - Base Shapes and Details -->
+  <g transform="translate(512, 512) scale(0.8) translate(-512, -512)">
+    <!-- Main head shape -->
+    <path d="M512 400 C 650 300 800 450 780 600 L 700 800 C 600 850 420 850 320 800 L 240 600 C 220 450 370 300 512 400 Z" fill="url(#furGradient1)" filter="url(#furTexture)"/>
+
+    <!-- Left Ear (background) -->
+    <path d="M350 380 Q 400 250 450 300 C 420 350 370 360 350 380 Z" fill="url(#furGradient1)" filter="url(#furTexture)"/>
+    <!-- Right Ear (foreground) -->
+    <path d="M670 380 Q 620 250 570 300 C 600 350 650 360 670 380 Z" fill="url(#furGradient1)" filter="url(#furTexture)"/>
+
+    <!-- Muzzle Base -->
+    <path d="M512 550 Q 450 500 400 550 C 450 650 574 650 624 550 Q 574 500 512 550 Z" fill="url(#furGradient2)" filter="url(#furTexture)"/>
+
+    <!-- Darker fur around face -->
+    <path d="M512 450 Q 430 400 380 480 C 400 550 480 600 512 590 C 544 600 624 550 644 480 Q 594 400 512 450 Z" fill="url(#darkFurGradient)" filter="url(#furTexture)"/>
+
+    <!-- Eyes -->
+    <!-- Left Eye -->
+    <circle cx="450" cy="500" r="45" fill="url(#eyeBlueGradient)" filter="url(#furGloss)"/>
+    <circle cx="450" cy="500" r="15" fill="#000"/> <!-- Pupil -->
+    <circle cx="440" cy="490" r="8" fill="white" opacity="0.8"/> <!-- Specular highlight 1 -->
+    <circle cx="460" cy="505" r="4" fill="white" opacity="0.6" filter="url(#softBlur)"/> <!-- Specular highlight 2 -->
+
+    <!-- Right Eye -->
+    <circle cx="574" cy="500" r="45" fill="url(#eyeBrownGradient)" filter="url(#furGloss)"/>
+    <circle cx="574" cy="500" r="15" fill="#000"/> <!-- Pupil -->
+    <circle cx="564" cy="490" r="8" fill="white" opacity="0.8"/> <!-- Specular highlight 1 -->
+    <circle cx="584" cy="505" r="4" fill="white" opacity="0.6" filter="url(#softBlur)"/> <!-- Specular highlight 2 -->
+
+    <!-- Nose -->
+    <path d="M512 580 C 490 560 480 570 480 590 C 480 610 490 620 512 620 C 534 620 544 610 544 590 C 544 570 534 560 512 580 Z" fill="url(#noseGradient)" filter="url(#furGloss)"/>
+    <!-- Nose texture/highlights -->
+    <circle cx="505" cy="588" r="3" fill="#888" opacity="0.7"/>
+    <circle cx="519" cy="588" r="3" fill="#888" opacity="0.7"/>
+    <path d="M512 585 C 510 580 514 580 512 585 Z" fill="#fff" opacity="0.5"/>
+
+    <!-- Mouth Line -->
+    <path d="M490 620 Q 512 630 534 620" stroke="#000" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M490 620 Q 485 630 490 640 Q 512 650 534 640 Q 539 630 534 620" fill="#303030" opacity="0.2"/>
+
+    <!-- Fur details - many paths for individual strands and clumps -->
+    <!-- White Fur on Forehead -->
+    <path d="M512 450 Q 470 420 460 460 Q 480 490 512 480 Q 544 490 564 460 Q 554 420 512 450 Z" fill="url(#furGradient2)" filter="url(#furTexture)"/>
+    <path d="M512 460 Q 490 440 480 470 C 490 490 512 490 512 460 Z" fill="#fff" opacity="0.8" filter="url(#softBlur)"/>
+    <path d="M512 460 Q 534 440 544 470 C 534 490 512 490 512 460 Z" fill="#fff" opacity="0.8" filter="url(#softBlur)"/>
+
+    <!-- Highlights on Darker Fur -->
+    <path d="M400 490 C 410 480 430 470 450 480 L 460 510 C 440 520 420 510 400 490 Z" fill="#c0c0c0" opacity="0.6" filter="url(#softBlur)"/>
+    <path d="M624 490 C 614 480 594 470 574 480 L 564 510 C 584 520 604 510 624 490 Z" fill="#c0c0c0" opacity="0.6" filter="url(#softBlur)"/>
+
+    <!-- Cheeks / Side Fur -->
+    <path d="M350 550 Q 300 580 320 650 Q 380 700 450 680 C 400 620 370 580 350 550 Z" fill="url(#furGradient1)" filter="url(#furTexture)"/>
+    <path d="M674 550 Q 724 580 704 650 Q 644 700 574 680 C 624 620 654 580 674 550 Z" fill="url(#furGradient1)" filter="url(#furTexture)"/>
+
+    <!-- Multiple groups of fine fur strokes for texture -->
+    <g stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.3">
+      <path d="M490 465 Q 480 460 490 455"/>
+      <path d="M530 465 Q 540 460 530 455"/>
+      <path d="M485 470 Q 475 465 485 460"/>
+      <path d="M535 470 Q 545 465 535 460"/>
+      <path d="M490 475 Q 480 470 490 465"/>
+      <path d="M530 475 Q 540 470 530 465"/>
+      <path d="M470 490 Q 460 485 470 480"/>
+      <path d="M550 490 Q 560 485 550 480"/>
+      <path d="M465 500 Q 455 495 465 490"/>
+      <path d="M555 500 Q 565 495 555 490"/>
+    </g>
+    <g stroke="#e0e0e0" stroke-width="1" stroke-linecap="round" opacity="0.4">
+        <path d="M512 450 Q 500 435 505 440"/>
+        <path d="M512 450 Q 524 435 519 440"/>
+        <path d="M470 480 C 475 475 470 470"/>
+        <path d="M480 485 C 485 480 480 475"/>
+        <path d="M554 480 C 549 475 554 470"/>
+        <path d="M544 485 C 539 480 544 475"/>
+        <path d="M380 510 C 385 505 380 500"/>
+        <path d="M390 515 C 395 510 390 505"/>
+        <path d="M644 510 C 639 505 644 500"/>
+        <path d="M634 515 C 629 510 634 505"/>
+    </g>
+    <g stroke="#303030" stroke-width="1" stroke-linecap="round" opacity="0.5">
+        <path d="M420 520 C 415 515 420 510"/>
+        <path d="M430 525 C 435 520 430 515"/>
+        <path d="M604 520 C 599 515 604 510"/>
+        <path d="M594 525 C 589 520 594 515"/>
+        <path d="M450 550 C 445 545 450 540"/>
+        <path d="M460 555 C 465 550 460 545"/>
+        <path d="M574 550 C 569 545 574 540"/>
+        <path d="M564 555 C 559 550 564 545"/>
+    </g>
+
+    <!-- Chest fur -->
+    <path d="M400 750 Q 512 700 624 750 Q 650 850 512 870 Q 374 850 400 750 Z" fill="url(#furGradient2)" filter="url(#furTexture)"/>
+    <path d="M400 750 C 450 720 574 720 624 750" fill="none" stroke="#e0e0e0" stroke-width="5" opacity="0.4" filter="url(#softBlur)"/>
+
+    <!-- Whiskers (thin paths) -->
+    <path d="M460 590 Q 400 580 380 570" stroke="#333" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M465 600 Q 405 595 385 585" stroke="#333" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M470 610 Q 410 605 390 595" stroke="#333" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M564 590 Q 624 580 644 570" stroke="#333" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M559 600 Q 619 595 639 585" stroke="#333" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M554 610 Q 614 605 634 595" stroke="#333" stroke-width="1" fill="none" opacity="0.5"/>
+  </g>
+
+  <!-- Foreground Snow details (Sharper) -->
+  <g opacity="0.8">
+    <circle cx="100" cy="950" r="30" fill="#f0f8fb" filter="url(#softBlur)"/>
+    <circle cx="900" cy="980" r="40" fill="#f0f8fb" filter="url(#softBlur)"/>
+    <path d="M0 900 C 100 880 200 900 300 900 Q 400 920 512 910 Q 600 900 700 910 Q 800 920 900 910 L 1024 900 V 1024 H 0 Z" fill="#e8f0f2"/>
+    <path d="M0 930 C 150 910 300 930 450 940 L 512 945 Q 600 950 750 940 Q 900 930 1024 940 V 1024 H 0 Z" fill="#f8fcfd"/>
+  </g>
+
+  <!-- Snowflakes / Micro-details (foreground, some blurred, some sharp) -->
+  <g fill="#fff" opacity="0.7">
+    <circle cx="50" cy="50" r="2" filter="url(#softBlur)"/>
+    <circle cx="150" cy="100" r="1.5"/>
+    <circle cx="900" cy="120" r="2.5" filter="url(#softBlur)"/>
+    <circle cx="950" cy="400" r="1"/>
+    <circle cx="200" cy="800" r="3"/>
+    <circle cx="700" cy="150" r="1.8"/>
+    <circle cx="300" cy="900" r="2.2" filter="url(#softBlur)"/>
+    <circle cx="600" cy="850" r="1.5"/>
+    <circle cx="100" cy="400" r="2"/>
+    <circle cx="850" cy="600" r="2.5" filter="url(#softBlur)"/>
+    <circle cx="400" cy="100" r="1"/>
+    <circle cx="50" cy="700" r="2.3" filter="url(#softBlur)"/>
+    <circle cx="980" cy="250" r="1.5"/>
+    <circle cx="250" cy="200" r="2"/>
+    <circle cx="750" cy="800" r="1.7"/>
+    <circle cx="180" cy="650" r="2.8" filter="url(#softBlur)"/>
+    <circle cx="880" cy="50" r="1"/>
+    <circle cx="350" cy="70" r="1.2"/>
+    <circle cx="120" cy="250" r="1.6"/>
+    <circle cx="450" cy="950" r="2.1" filter="url(#softBlur)"/>
+    <circle cx="680" cy="60" r="1.3"/>
+    <circle cx="80" cy="850" r="2.5" filter="url(#softBlur)"/>
+    <circle cx="920" cy="880" r="1.8"/>
+  </g>
+
+  <!-- Additional fur texture and highlights for realism (many tiny paths to simulate individual hairs) -->
+  <g stroke="#ffffff" stroke-width="0.5" stroke-linecap="round" opacity="0.2">
+    <!-- Thousands of tiny hair strokes. For brevity, only a representative sample is included. -->
+    <path d="M490 460 Q 485 455 490 450" />
+    <path d="M492 462 Q 487 457 492 452" />
+    <path d="M494 464 Q 489 459 494 454" />
+    <path d="M530 460 Q 535 455 530 450" />
+    <path d="M528 462 Q 533 457 528 452" />
+    <path d="M526 464 Q 531 459 526 454" />
+    <path d="M450 500 C 448 495 445 497 450 500" />
+    <path d="M452 502 C 450 497 447 499 452 502" />
+    <path d="M574 500 C 576 495 579 497 574 500" />
+    <path d="M572 502 C 574 497 577 499 572 502" />
+    <path d="M380 500 C 378 495 375 497 380 500" />
+    <path d="M644 500 C 646 495 649 497 644 500" />
+    <path d="M400 750 C 402 745 398 747 400 750" />
+    <path d="M405 755 C 407 750 403 752 405 755" />
+    <path d="M624 750 C 622 745 626 747 624 750" />
+    <path d="M619 755 C 617 750 621 752 619 755" />
+    <path d="M512 800 C 510 795 514 797 512 800" />
+    <path d="M512 805 C 510 800 514 802 512 805" />
+    <path d="M480 780 C 478 775 482 777 480 780" />
+    <path d="M544 780 C 542 775 546 777 544 780" />
+    <path d="M350 550 C 348 545 345 547 350 550" />
+    <path d="M355 555 C 353 550 350 552 355 555" />
+    <path d="M674 550 C 676 545 679 547 674 550" />
+    <path d="M669 555 C 671 550 674 552 669 555" />
+    <path d="M420 400 C 418 395 415 397 420 400" />
+    <path d="M425 405 C 423 400 420 402 425 405" />
+    <path d="M604 400 C 606 395 609 397 604 400" />
+    <path d="M599 405 C 601 400 604 402 599 405" />
+  </g>
+</svg>

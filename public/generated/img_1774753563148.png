@@ -1,0 +1,251 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024">
+  <style>
+    /* CSS Animations for subtle movement */
+    @keyframes sway {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(2px, -1px) rotate(0.5deg); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes subtleGlow {
+      0% { filter: url(#petalGlow1); }
+      50% { filter: url(#petalGlow2); }
+      100% { filter: url(#petalGlow1); }
+    }
+    @keyframes breath {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.005); }
+      100% { transform: scale(1); }
+    }
+    @keyframes leafRustle {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(0.3deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    .leaf { animation: leafRustle 10s ease-in-out infinite alternate; transform-origin: center bottom; }
+    .petal { animation: breath 8s ease-in-out infinite alternate; transform-origin: center center; }
+    .flower-center { animation: sparkle 6s ease-in-out infinite alternate; }
+    .stem { animation: sway 12s ease-in-out infinite alternate; }
+    .background-element { animation: sway 15s ease-in-out infinite alternate; }
+  </style>
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;" /> <!-- Light Sky Blue -->
+      <stop offset="50%" style="stop-color:#B0E0E6;" /> <!-- Powdery Blue -->
+      <stop offset="100%" style="stop-color:#E0FFFF;" /> <!-- Light Cyan for horizon -->
+    </linearGradient>
+
+    <linearGradient id="horizonGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E6F2F0" />
+      <stop offset="100%" stop-color="#C5D9D4" />
+    </linearGradient>
+
+    <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5A4A3E;" /> <!-- Dark Brown -->
+      <stop offset="50%" style="stop-color:#7B6A5E;" /> <!-- Medium Brown -->
+      <stop offset="100%" style="stop-color:#4A3A2E;" /> <!-- Darker Brown -->
+    </linearGradient>
+
+    <radialGradient id="sunlightGradient" cx="70%" cy="10%" r="50%" fx="70%" fy="10%">
+      <stop offset="0%" style="stop-color:rgba(255,255,150,0.8);" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);" />
+    </radialGradient>
+
+    <!-- Flower Gradients -->
+    <radialGradient id="petalRedMain" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FF4500" /> <!-- Orange-Red -->
+      <stop offset="40%" stop-color="#DC143C" /> <!-- Crimson -->
+      <stop offset="80%" stop-color="#B22222" /> <!-- Firebrick -->
+      <stop offset="100%" stop-color="#8B0000" /> <!-- Dark Red -->
+    </radialGradient>
+
+    <radialGradient id="petalRedHighlight" cx="30%" cy="30%" r="70%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#FF6347" /> <!-- Tomato -->
+      <stop offset="50%" stop-color="#DC143C" /> <!-- Crimson -->
+      <stop offset="100%" stop-color="#8B0000" /> <!-- Dark Red -->
+    </radialGradient>
+
+    <linearGradient id="petalShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(139,0,0,0.8)" />
+      <stop offset="100%" stop-color="rgba(100,0,0,0.8)" />
+    </linearGradient>
+
+    <linearGradient id="stemGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3CB371" /> <!-- Medium Sea Green -->
+      <stop offset="50%" stop-color="#2E8B57" /> <!-- Sea Green -->
+      <stop offset="100%" stop-color="#006400" /> <!-- Dark Green -->
+    </linearGradient>
+
+    <radialGradient id="leafGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#9ACD32" /> <!-- Yellow Green -->
+      <stop offset="50%" stop-color="#6B8E23" /> <!-- Olive Drab -->
+      <stop offset="100%" stop-color="#556B2F" /> <!-- Dark Olive Green -->
+    </radialGradient>
+
+    <linearGradient id="leafVein" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(152,251,152,0.8)" />
+      <stop offset="50%" stop-color="rgba(107,142,35,0.8)" />
+      <stop offset="100%" stop-color="rgba(85,107,47,0.8)" />
+    </linearGradient>
+
+    <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFD700" /> <!-- Gold -->
+      <stop offset="50%" stop-color="#FFA500" /> <!-- Orange -->
+      <stop offset="100%" stop-color="#FF8C00" /> <!-- Dark Orange -->
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="3" stdDeviation="5" flood-color="rgba(0,0,0,0.5)"/>
+    </filter>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+    </filter>
+    <filter id="heavyBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15"/>
+    </filter>
+    <filter id="petalGlow1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feFlood flood-color="rgba(255,100,100,0.4)" result="flood"/>
+      <feComposite in="flood" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="petalGlow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feFlood flood-color="rgba(255,120,120,0.6)" result="flood"/>
+      <feComposite in="flood" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="textureNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="1" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2">
+        <feDistantLight azimuth="225" elevation="45"/>
+      </feDiffuseLighting>
+      <feComposite in="SourceGraphic" in2="diffuseLighting" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+    <filter id="pollenGlow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur"/>
+      <feFlood flood-color="rgba(255,255,0,0.7)" result="flood"/>
+      <feComposite in="flood" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background: Sky and Horizon -->
+  <rect x="0" y="0" width="1024" height="600" fill="url(#skyGradient)"/>
+  <rect x="0" y="400" width="1024" height="200" fill="url(#horizonGradient)"/>
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#sunlightGradient)"/>
+
+  <!-- Distant blurred garden elements (trees/bushes) -->
+  <g filter="url(#heavyBlur)" class="background-element" transform="translate(-10, 0)">
+    <ellipse cx="200" cy="500" rx="150" ry="80" fill="#3E6A3A" opacity="0.7"/>
+    <ellipse cx="450" cy="480" rx="180" ry="90" fill="#2E5A2A" opacity="0.8"/>
+    <ellipse cx="700" cy="520" rx="160" ry="85" fill="#3A6A3A" opacity="0.75"/>
+    <ellipse cx="900" cy="490" rx="140" ry="75" fill="#2A5A2A" opacity="0.85"/>
+  </g>
+  <g filter="url(#blur)" class="background-element" transform="translate(10, 5)">
+    <ellipse cx="100" cy="580" rx="100" ry="50" fill="#5E8A5A" opacity="0.7"/>
+    <ellipse cx="300" cy="560" rx="120" ry="60" fill="#4E7A4A" opacity="0.8"/>
+    <ellipse cx="550" cy="590" rx="110" ry="55" fill="#5A8A5A" opacity="0.75"/>
+    <ellipse cx="800" cy="570" rx="130" ry="65" fill="#4A7A4A" opacity="0.85"/>
+  </g>
+
+  <!-- Ground/Soil -->
+  <path d="M0 600 Q200 580 500 620 T1024 600 L1024 1024 L0 1024 Z" fill="url(#groundGradient)" filter="url(#textureNoise)"/>
+
+  <!-- Foreground blurred grass/foliage -->
+  <g filter="url(#blur)" class="leaf">
+    <path d="M10 900 Q100 850 200 900 L150 1024 L0 1024 Z" fill="url(#leafGradient)"/>
+    <path d="M250 880 Q350 830 450 880 L400 1024 L200 1024 Z" fill="url(#leafGradient)"/>
+    <path d="M500 920 Q600 870 700 920 L650 1024 L450 1024 Z" fill="url(#leafGradient)"/>
+    <path d="M750 890 Q850 840 950 890 L900 1024 L700 1024 Z" fill="url(#leafGradient)"/>
+  </g>
+
+  <!-- Main Flower Stem -->
+  <path d="M500 650 Q510 500 505 300 L495 300 Q490 500 500 650 Z" fill="url(#stemGradient)" filter="url(#softShadow)" class="stem"/>
+
+  <!-- Main Flower Leaves -->
+  <g class="leaf">
+    <path d="M480 550 Q400 500 350 550 Q300 600 380 620 L480 550 Z" fill="url(#leafGradient)" filter="url(#softShadow)" transform="rotate(-15 480 550)"/>
+    <path d="M480 550 Q560 500 610 550 Q660 600 580 620 L480 550 Z" fill="url(#leafGradient)" filter="url(#softShadow)" transform="rotate(15 480 550)"/>
+    <path d="M490 450 Q430 400 390 450 Q350 500 420 520 L490 450 Z" fill="url(#leafGradient)" filter="url(#softShadow)" transform="rotate(-25 490 450)"/>
+    <path d="M510 450 Q570 400 610 450 Q650 500 580 520 L510 450 Z" fill="url(#leafGradient)" filter="url(#softShadow)" transform="rotate(25 510 450)"/>
+  </g>
+  <!-- More detailed veins on leaves -->
+  <g class="leaf">
+    <path d="M400 550 Q380 560 360 550 M370 570 Q350 580 330 570" stroke="url(#leafVein)" stroke-width="1.5" fill="none" opacity="0.7" transform="rotate(-15 480 550)"/>
+    <path d="M560 550 Q580 560 600 550 M590 570 Q610 580 630 570" stroke="url(#leafVein)" stroke-width="1.5" fill="none" opacity="0.7" transform="rotate(15 480 550)"/>
+  </g>
+
+  <!-- Main Flower Petals - layered for depth -->
+  <g transform="translate(0, -20)" filter="url(#softShadow)">
+    <!-- Back petals -->
+    <path d="M500 300 Q400 250 350 350 Q300 450 400 480 Q500 510 500 300 Z" fill="url(#petalRedHighlight)" class="petal" transform="rotate(-30 500 400)"/>
+    <path d="M500 300 Q600 250 650 350 Q700 450 600 480 Q500 510 500 300 Z" fill="url(#petalRedMain)" class="petal" transform="rotate(30 500 400)"/>
+    <path d="M500 300 Q450 200 400 300 Q350 400 450 450 Q500 480 500 300 Z" fill="url(#petalRedHighlight)" class="petal" transform="rotate(-60 500 400)"/>
+    <path d="M500 300 Q550 200 600 300 Q650 400 550 450 Q500 480 500 300 Z" fill="url(#petalRedMain)" class="petal" transform="rotate(60 500 400)"/>
+    <path d="M500 300 Q380 280 320 380 Q280 480 380 490 Q500 500 500 300 Z" fill="url(#petalRedMain)" class="petal" transform="rotate(-90 500 400)"/>
+    <path d="M500 300 Q620 280 680 380 Q720 480 620 490 Q500 500 500 300 Z" fill="url(#petalRedHighlight)" class="petal" transform="rotate(90 500 400)"/>
+
+    <!-- Middle layer petals -->
+    <path d="M500 300 Q420 280 380 360 Q340 440 440 470 Q500 490 500 300 Z" fill="url(#petalRedMain)" filter="url(#petalGlow1)" class="petal" transform="rotate(-15 500 400)"/>
+    <path d="M500 300 Q580 280 620 360 Q660 440 560 470 Q500 490 500 300 Z" fill="url(#petalRedHighlight)" filter="url(#petalGlow1)" class="petal" transform="rotate(15 500 400)"/>
+    <path d="M500 300 Q480 230 430 310 Q380 390 480 430 Q500 460 500 300 Z" fill="url(#petalRedHighlight)" filter="url(#petalGlow2)" class="petal" transform="rotate(-45 500 400)"/>
+    <path d="M500 300 Q520 230 570 310 Q620 390 520 430 Q500 460 500 300 Z" fill="url(#petalRedMain)" filter="url(#petalGlow2)" class="petal" transform="rotate(45 500 400)"/>
+    <path d="M500 300 Q390 320 350 420 Q310 500 410 490 Q500 470 500 300 Z" fill="url(#petalRedMain)" filter="url(#petalGlow1)" class="petal" transform="rotate(-75 500 400)"/>
+    <path d="M500 300 Q610 320 650 420 Q690 500 590 490 Q500 470 500 300 Z" fill="url(#petalRedHighlight)" filter="url(#petalGlow1)" class="petal" transform="rotate(75 500 400)"/>
+    <path d="M500 300 Q450 250 400 350 Q350 450 450 480 Q500 500 500 300 Z" fill="url(#petalRedMain)" filter="url(#petalGlow2)" class="petal" transform="rotate(-100 500 400)"/>
+    <path d="M500 300 Q550 250 600 350 Q650 450 550 480 Q500 500 500 300 Z" fill="url(#petalRedHighlight)" filter="url(#petalGlow2)" class="petal" transform="rotate(100 500 400)"/>
+
+    <!-- Front petals -->
+    <path d="M500 300 Q450 300 420 380 Q390 460 490 470 Q500 475 500 300 Z" fill="url(#petalRedHighlight)" class="petal" transform="rotate(-20 500 400)"/>
+    <path d="M500 300 Q550 300 580 380 Q610 460 510 470 Q500 475 500 300 Z" fill="url(#petalRedMain)" class="petal" transform="rotate(20 500 400)"/>
+    <path d="M500 300 Q480 260 450 340 Q420 420 480 450 Q500 460 500 300 Z" fill="url(#petalRedMain)" class="petal" transform="rotate(-50 500 400)"/>
+    <path d="M500 300 Q520 260 550 340 Q580 420 520 450 Q500 460 500 300 Z" fill="url(#petalRedHighlight)" class="petal" transform="rotate(50 500 400)"/>
+    <path d="M500 300 Q400 350 400 450 Q400 500 500 490 Q500 480 500 300 Z" fill="url(#petalRedHighlight)" class="petal" transform="rotate(-80 500 400)"/>
+    <path d="M500 300 Q600 350 600 450 Q600 500 500 490 Q500 480 500 300 Z" fill="url(#petalRedMain)" class="petal" transform="rotate(80 500 400)"/>
+  </g>
+
+  <!-- Flower Center (stamen/pistil area) -->
+  <circle cx="500" cy="400" r="50" fill="url(#centerGradient)" filter="url(#shadow)" class="flower-center"/>
+  <g class="flower-center" filter="url(#pollenGlow)">
+    <circle cx="505" cy="380" r="3" fill="#FFD700" opacity="0.9"/>
+    <circle cx="490" cy="390" r="2.5" fill="#FFD700" opacity="0.8"/>
+    <circle cx="515" cy="400" r="3.5" fill="#FFD700" opacity="0.95"/>
+    <circle cx="485" cy="410" r="2.8" fill="#FFD700" opacity="0.85"/>
+    <circle cx="500" cy="425" r="3.2" fill="#FFD700" opacity="0.92"/>
+    <circle cx="520" cy="415" r="2.7" fill="#FFD700" opacity="0.83"/>
+    <circle cx="475" cy="400" r="3.1" fill="#FFD700" opacity="0.88"/>
+    <circle cx="500" cy="360" r="3" fill="#FFD700" opacity="0.9"/>
+    <circle cx="520" cy="370" r="2.5" fill="#FFD700" opacity="0.8"/>
+    <circle cx="480" cy="375" r="3.5" fill="#FFD700" opacity="0.95"/>
+    <circle cx="530" cy="390" r="2.8" fill="#FFD700" opacity="0.85"/>
+  </g>
+
+  <!-- Light highlight/bloom overlay -->
+  <rect x="0" y="0" width="1024" height="1024" fill="rgba(255,255,255,0.05)" filter="url(#blur)" class="sparkle"/>
+
+  <!-- Additional foreground elements for depth -->
+  <g filter="url(#blur)" class="leaf" transform="translate(0, 50)">
+    <path d="M-50 950 Q100 880 250 950 L200 1024 L-100 1024 Z" fill="url(#leafGradient)" opacity="0.6"/>
+    <path d="M800 960 Q900 900 1050 960 L1100 1024 L750 1024 Z" fill="url(#leafGradient)" opacity="0.6"/>
+  </g>
+
+</svg>

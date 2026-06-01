@@ -1,0 +1,247 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024">
+  <style>
+    /* Keyframes for animations */
+    @keyframes sunPulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.02); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+    @keyframes cloudFloat {
+      0% { transform: translateX(0px); }
+      100% { transform: translateX(20px); }
+    }
+    @keyframes cityLightsGlow {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+    @keyframes distantCityShimmer {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+    @keyframes vehicleHover {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      25% { transform: translateY(-3px) translateX(5px); }
+      75% { transform: translateY(3px) translateX(-5px); }
+    }
+    @keyframes smallGlow {
+      0%, 100% { filter: url(#smallBloom); }
+      50% { filter: url(#strongBloom); }
+    }
+    /* General styles */
+    .sun {
+      animation: sunPulse 8s ease-in-out infinite alternate;
+    }
+    .cloud {
+      animation: cloudFloat 20s ease-in-out infinite alternate;
+      transform-origin: center;
+    }
+    .city-light {
+      animation: cityLightsGlow 3s ease-in-out infinite alternate;
+    }
+    .distant-city {
+      animation: distantCityShimmer 10s ease-in-out infinite alternate;
+    }
+    .vehicle {
+      animation: vehicleHover 15s ease-in-out infinite alternate;
+    }
+    .window-glow {
+      animation: smallGlow 2s ease-in-out infinite;
+    }
+  </style>
+
+  <defs>
+    <!-- Gradients for the sky and sun -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A1931" />
+      <stop offset="30%" style="stop-color:#3E3F6D" />
+      <stop offset="60%" style="stop-color:#8D6B9F" />
+      <stop offset="85%" style="stop-color:#EE786E" />
+      <stop offset="100%" style="stop-color:#F5C6A0" />
+    </linearGradient>
+
+    <radialGradient id="sunGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FF4500;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FF0000;stop-opacity:0" />
+    </radialGradient>
+
+    <radialGradient id="horizonGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/>
+        <stop offset="20%" stop-color="#FFA500" stop-opacity="0.6"/>
+        <stop offset="50%" stop-color="#FF4500" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="cityGradientFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4B0082"/>
+      <stop offset="50%" stop-color="#2D0052"/>
+      <stop offset="100%" stop-color="#1A002F"/>
+    </linearGradient>
+
+    <linearGradient id="cityGradientMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6A5ACD"/>
+      <stop offset="50%" stop-color="#483D8B"/>
+      <stop offset="100%" stop-color="#2F2F4F"/>
+    </linearGradient>
+
+    <linearGradient id="cityGradientBack" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#7B68EE"/>
+        <stop offset="50%" stop-color="#5B4F9B"/>
+        <stop offset="100%" stop-color="#3A326F"/>
+    </linearGradient>
+
+
+    <!-- Filters for glow and blur effects -->
+    <filter id="sunGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="25" result="blur"></feGaussianBlur>
+      <feFlood flood-color="#FFD700" flood-opacity="0.6" result="color"></feFlood>
+      <feComposite in="color" in2="blur" operator="in" result="glow"></feComposite>
+      <feComposite in="SourceGraphic" in2="glow" operator="atop"></feComposite>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="hazeBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15"></feGaussianBlur>
+    </filter>
+
+    <filter id="smallBloom" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blurredAlpha"/>
+      <feOffset in="blurredAlpha" dx="0" dy="0" result="offsetBlur"/>
+      <feFlood flood-color="#FFF8DC" flood-opacity="0.7" result="glowColor"/>
+      <feComposite in="glowColor" in2="offsetBlur" operator="in" result="glowComposite"/>
+      <feMerge>
+        <feMergeNode in="glowComposite"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="strongBloom" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blurredAlpha"/>
+        <feOffset in="blurredAlpha" dx="0" dy="0" result="offsetBlur"/>
+        <feFlood flood-color="#FFFAEF" flood-opacity="0.9" result="glowColor"/>
+        <feComposite in="glowColor" in2="offsetBlur" operator="in" result="glowComposite"/>
+        <feMerge>
+            <feMergeNode in="glowComposite"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+
+  </defs>
+
+  <!-- Sky background -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#skyGradient)" />
+
+  <!-- Sun -->
+  <circle cx="512" cy="700" r="100" fill="url(#sunGradient)" class="sun" filter="url(#sunGlow)" />
+
+  <!-- Horizon glow for atmosphere -->
+  <ellipse cx="512" cy="710" rx="300" ry="80" fill="url(#horizonGlow)" filter="url(#hazeBlur)" opacity="0.6" />
+
+  <!-- Additional atmospheric haze/clouds -->
+  <ellipse cx="200" cy="500" rx="100" ry="30" fill="#E0BBE4" opacity="0.15" filter="url(#hazeBlur)" class="cloud" style="animation-duration: 25s;"/>
+  <ellipse cx="800" cy="400" rx="120" ry="40" fill="#E0BBE4" opacity="0.1" filter="url(#hazeBlur)" class="cloud" style="animation-duration: 22s; animation-delay: -5s;"/>
+  <ellipse cx="512" cy="300" rx="150" ry="50" fill="#E0BBE4" opacity="0.08" filter="url(#hazeBlur)" class="cloud" style="animation-duration: 30s; animation-delay: -10s;"/>
+
+  <!-- Distant city (silhouette) -->
+  <g class="distant-city" transform="translate(0, -50)">
+    <path d="M0 800 L0 550 L100 500 L200 520 L300 480 L400 500 L500 450 L600 480 L700 400 L800 450 L900 380 L1024 420 L1024 800 Z" fill="url(#cityGradientBack)" opacity="0.9"/>
+    <rect x="150" y="480" width="20" height="70" fill="#E0BBE4" class="city-light" />
+    <rect x="200" y="490" width="15" height="50" fill="#E0BBE4" class="city-light" />
+    <rect x="750" y="420" width="25" height="90" fill="#E0BBE4" class="city-light" />
+    <rect x="800" y="430" width="20" height="70" fill="#E0BBE4" class="city-light" />
+    <rect x="900" y="390" width="10" height="60" fill="#E0BBE4" class="city-light" />
+    <polygon points="500,450 510,400 520,450" fill="url(#cityGradientBack)" opacity="0.9"/>
+    <polygon points="700,400 710,350 720,400" fill="url(#cityGradientBack)" opacity="0.9"/>
+  </g>
+
+  <!-- Mid-ground city -->
+  <g transform="translate(0, -30)">
+    <path d="M0 850 L0 600 L80 550 L180 580 L250 520 L350 550 L450 500 L550 520 L650 480 L750 500 L850 450 L950 480 L1024 430 L1024 850 Z" fill="url(#cityGradientMid)" opacity="0.95"/>
+    <rect x="50" y="580" width="30" height="80" fill="#FFECB3" class="city-light" />
+    <rect x="120" y="540" width="20" height="100" fill="#FFECB3" class="city-light" />
+    <rect x="280" y="500" width="40" height="120" fill="#FFECB3" class="city-light" />
+    <rect x="400" y="480" width="25" height="90" fill="#FFECB3" class="city-light" />
+    <rect x="600" y="450" width="30" height="110" fill="#FFECB3" class="city-light" />
+    <rect x="780" y="420" width="20" height="130" fill="#FFECB3" class="city-light" />
+    <rect x="920" y="400" width="35" height="100" fill="#FFECB3" class="city-light" />
+  </g>
+
+  <!-- Foreground city -->
+  <g>
+    <path d="M0 1024 L0 700 L150 600 L300 650 L450 550 L600 600 L750 500 L900 550 L1024 500 L1024 1024 Z" fill="url(#cityGradientFront)" />
+
+    <!-- Main building left -->
+    <rect x="50" y="650" width="120" height="300" fill="#1A002F" />
+    <rect x="60" y="660" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="90" y="660" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="120" y="660" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="60" y="700" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="90" y="700" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="120" y="700" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="60" y="740" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="90" y="740" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="120" y="740" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="70" y="600" width="10" height="50" fill="#FFECB3" class="city-light window-glow"/>
+    <rect x="140" y="610" width="10" height="40" fill="#FFECB3" class="city-light window-glow"/>
+    <polygon points="100,650 110,580 120,650" fill="#2D0052"/> <!-- Spire -->
+
+    <!-- Main building right -->
+    <rect x="850" y="600" width="120" height="400" fill="#1A002F" />
+    <rect x="860" y="610" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="890" y="610" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="920" y="610" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="860" y="650" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="890" y="650" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="920" y="650" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="860" y="690" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="890" y="690" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="920" y="690" width="20" height="30" fill="#FFECB3" class="city-light"/>
+    <rect x="870" y="550" width="10" height="50" fill="#FFECB3" class="city-light window-glow"/>
+    <rect x="930" y="560" width="10" height="40" fill="#FFECB3" class="city-light window-glow"/>
+    <polygon points="900,600 910,530 920,600" fill="#2D0052"/> <!-- Spire -->
+
+    <!-- Central structure -->
+    <rect x="450" y="600" width="150" height="350" fill="#2D0052" />
+    <rect x="460" y="610" width="20" height="40" fill="#FFF8DC" class="city-light window-glow"/>
+    <rect x="490" y="620" width="20" height="30" fill="#FFF8DC" class="city-light"/>
+    <rect x="520" y="610" width="20" height="40" fill="#FFF8DC" class="city-light window-glow"/>
+    <rect x="550" y="620" width="20" height="30" fill="#FFF8DC" class="city-light"/>
+    <rect x="460" y="660" width="20" height="40" fill="#FFF8DC" class="city-light"/>
+    <rect x="490" y="670" width="20" height="30" fill="#FFF8DC" class="city-light"/>
+    <rect x="520" y="660" width="20" height="40" fill="#FFF8DC" class="city-light"/>
+    <rect x="550" y="670" width="20" height="30" fill="#FFF8DC" class="city-light"/>
+    <rect x="460" y="710" width="20" height="40" fill="#FFF8DC" class="city-light"/>
+    <rect x="490" y="720" width="20" height="30" fill="#FFF8DC" class="city-light"/>
+    <rect x="520" y="710" width="20" height="40" fill="#FFF8DC" class="city-light"/>
+    <rect x="550" y="720" width="20" height="30" fill="#FFF8DC" class="city-light"/>
+    <polygon points="525,600 512,500 500,600 512,550" fill="#FFF8DC" class="city-light window-glow"/> <!-- Top antenna -->
+    <circle cx="512" cy="500" r="5" fill="#FFF8DC" class="city-light window-glow"/>
+
+    <!-- Smaller foreground buildings/platforms -->
+    <rect x="250" y="700" width="80" height="200" fill="#2D0052"/>
+    <rect x="260" y="710" width="15" height="25" fill="#FFECB3" class="city-light"/>
+    <rect x="290" y="720" width="15" height="20" fill="#FFECB3" class="city-light"/>
+
+    <rect x="680" y="700" width="80" height="200" fill="#2D0052"/>
+    <rect x="690" y="710" width="15" height="25" fill="#FFECB3" class="city-light"/>
+    <rect x="720" y="720" width="15" height="20" fill="#FFECB3" class="city-light"/>
+
+    <!-- Flying vehicles/drones -->
+    <g class="vehicle" transform="translate(100, 500)">
+      <polygon points="0,0 10,5 0,10 -10,5" fill="#FFF8DC" filter="url(#smallBloom)"/>
+      <circle cx="0" cy="5" r="3" fill="#00BFFF" />
+    </g>
+    <g class="vehicle" transform="translate(700, 480)">
+      <polygon points="0,0 10,5 0,10 -10,5" fill="#FFF8DC" filter="url(#smallBloom)"/>
+      <circle cx="0" cy="5" r="3" fill="#00BFFF" />
+    </g>
+    <g class="vehicle" transform="translate(450, 400)">
+      <polygon points="0,0 10,5 0,10 -10,5" fill="#FFF8DC" filter="url(#smallBloom)"/>
+      <circle cx="0" cy="5" r="3" fill="#00BFFF" />
+    </g>
+  </g>
+</svg>

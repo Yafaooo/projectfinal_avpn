@@ -1,0 +1,260 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="backgroundGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#3a2e2b"/>
+      <stop offset="100%" stop-color="#2a201c"/>
+    </radialGradient>
+    <radialGradient id="softLightEffect" cx="60%" cy="30%" r="80%" fx="60%" fy="30%">
+      <stop offset="0%" stop-color="rgba(255,255,200,0.15)"/>
+      <stop offset="100%" stop-color="rgba(255,255,200,0)"/>
+    </radialGradient>
+
+    <!-- Fur Gradients - Base and variations -->
+    <linearGradient id="furBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8a5a41"/>
+      <stop offset="50%" stop-color="#b87b5a"/>
+      <stop offset="100%" stop-color="#a0684f"/>
+    </linearGradient>
+    <linearGradient id="furDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6e4934"/>
+      <stop offset="50%" stop-color="#9d694b"/>
+      <stop offset="100%" stop-color="#855a43"/>
+    </linearGradient>
+    <linearGradient id="furLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c18d6c"/>
+      <stop offset="50%" stop-color="#e2aa85"/>
+      <stop offset="100%" stop-color="#d19c77"/>
+    </linearGradient>
+    <linearGradient id="furHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,240,0.8)"/>
+      <stop offset="100%" stop-color="rgba(255,255,240,0)"/>
+    </linearGradient>
+
+    <!-- Eye Gradients -->
+    <radialGradient id="irisGreen" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#7fb53e"/>
+      <stop offset="60%" stop-color="#5a8b2c"/>
+      <stop offset="100%" stop-color="#3c5e1c"/>
+    </radialGradient>
+    <radialGradient id="eyeReflectionBright" cx="50%" cy="50%" r="50%" fx="45%" fy="45%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.9)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+
+    <!-- Nose Gradients -->
+    <linearGradient id="noseGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e0a89d"/>
+      <stop offset="100%" stop-color="#b37f71"/>
+    </linearGradient>
+
+    <!-- Filters for realism -->
+    <filter id="softBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15"/>
+    </filter>
+    <filter id="lightBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+    </filter>
+    <filter id="depthOfFieldBackground">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.7"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="furTextureLighting">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.1" numOctaves="3" seed="1" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="white" surfaceScale="5" result="diffuse">
+        <fePointLight x="200" y="200" z="50"/>
+      </feDiffuseLighting>
+      <feComposite in="SourceGraphic" in2="diffuse" operator="arithmetic" k1="1" k2="0" k3="1" k4="0" result="lit"/>
+      <feSpecularLighting in="noise" lighting-color="white" surfaceScale="2" specularConstant="0.7" specularExponent="30" result="specular">
+        <fePointLight x="200" y="200" z="50"/>
+      </feSpecularLighting>
+      <feComposite in="lit" in2="specular" operator="arithmetic" k1="1" k2="0.1" k3="0.1" k4="0"/>
+    </filter>
+    <filter id="softGlowOverlay">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="40"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="detailSharpen">
+        <feConvolveMatrix order="3 3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0"/>
+    </filter>
+    <filter id="microTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.2" numOctaves="2" result="textureNoise"/>
+      <feDisplacementMap in="SourceGraphic" in2="textureNoise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#backgroundGradient)" filter="url(#depthOfFieldBackground)"/>
+  <circle cx="200" cy="850" r="150" fill="#4d3e3a" filter="url(#depthOfFieldBackground)"/>
+  <circle cx="800" cy="150" r="100" fill="#4d3e3a" filter="url(#depthOfFieldBackground)"/>
+
+  <!-- Volumetric light effect in background -->
+  <circle cx="650" cy="250" r="400" fill="url(#softLightEffect)" filter="url(#softGlowOverlay)"/>
+
+  <!-- Main cat head shape - base for fur layering and shadow casting -->
+  <g transform="translate(0, 50)">
+    <path d="M512,150 C700,50 850,250 850,450 C850,650 700,850 512,850 C324,850 174,650 174,450 C174,250 324,50 512,150 Z"
+          fill="url(#furBase)" filter="url(#furTextureLighting)"/>
+
+    <!-- Ears -->
+    <path d="M400,180 C430,80 470,80 500,180 C480,150 420,150 400,180 Z" fill="url(#furDark)" filter="url(#furTextureLighting)"/>
+    <path d="M624,180 C594,80 554,80 524,180 C544,150 604,150 624,180 Z" fill="url(#furDark)" filter="url(#furTextureLighting)"/>
+    <path d="M440,190 C450,150 460,150 470,190 Q460,180 440,190 Z" fill="#bfa092" filter="url(#lightBlur)"/> <!-- Inner ear -->
+    <path d="M550,190 C560,150 570,150 580,190 Q570,180 550,190 Z" fill="#bfa092" filter="url(#lightBlur)"/> <!-- Inner ear -->
+
+    <!-- Left Eye -->
+    <circle cx="400" cy="400" r="60" fill="#f0f0f0" stroke="#777" stroke-width="2"/> <!-- Sclera -->
+    <circle cx="400" cy="400" r="50" fill="url(#irisGreen)"/> <!-- Iris -->
+    <ellipse cx="400" cy="400" rx="15" ry="30" fill="black"/> <!-- Pupil -->
+    <path d="M375,390 C380,380 400,370 420,380 C410,375 390,375 375,390 Z" fill="url(#eyeReflectionBright)"/> <!-- Main Highlight -->
+    <circle cx="385" cy="410" r="8" fill="rgba(255,255,255,0.7)"/> <!-- Secondary Highlight -->
+    <path d="M365,420 Q375,425 370,435 Q360,430 365,420 Z" fill="#f5c1b1" opacity="0.8"/> <!-- Tear duct -->
+
+    <!-- Right Eye (slightly obscured/angled) -->
+    <circle cx="620" cy="410" r="55" fill="#f0f0f0" stroke="#777" stroke-width="2"/> <!-- Sclera -->
+    <circle cx="620" cy="410" r="45" fill="url(#irisGreen)"/> <!-- Iris -->
+    <ellipse cx="620" cy="410" rx="13" ry="27" fill="black"/> <!-- Pupil -->
+    <path d="M595,400 C600,390 620,380 640,390 C630,385 610,385 595,400 Z" fill="url(#eyeReflectionBright)"/> <!-- Main Highlight -->
+    <circle cx="605" cy="420" r="7" fill="rgba(255,255,255,0.7)"/> <!-- Secondary Highlight -->
+    <path d="M585,430 Q595,435 590,445 Q580,440 585,430 Z" fill="#f5c1b1" opacity="0.8"/> <!-- Tear duct -->
+
+    <!-- Nose -->
+    <path d="M512,550 C495,530 529,530 512,550 L500,560 C500,570 524,570 524,560 Z" fill="url(#noseGradient)" stroke="#a0756a" stroke-width="1.5" filter="url(#microTexture)"/>
+    <ellipse cx="500" cy="560" rx="8" ry="12" fill="black" opacity="0.8"/> <!-- Left nostril -->
+    <ellipse cx="524" cy="560" rx="8" ry="12" fill="black" opacity="0.8"/> <!-- Right nostril -->
+    <path d="M512,550 Q508,555 512,560 Q516,555 512,550 Z" fill="white" opacity="0.6"/> <!-- Nose highlight -->
+
+    <!-- Muzzle/Mouth -->
+    <path d="M512,580 C480,600 544,600 512,580 L512,650" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="480" cy="620" rx="15" ry="5" fill="#f5c1b1" opacity="0.6"/>
+    <ellipse cx="544" cy="620" rx="15" ry="5" fill="#f5c1b1" opacity="0.6"/>
+
+    <!-- Whiskers (detailed, with subtle variations) -->
+    <g stroke="#222" stroke-width="1.5" stroke-linecap="round" filter="url(#detailSharpen)">
+      <!-- Left side -->
+      <path d="M480,590 Q400,550 300,500" opacity="0.75"/>
+      <path d="M475,600 Q390,580 280,550" opacity="0.8"/>
+      <path d="M470,610 Q380,610 270,600" opacity="0.7"/>
+      <path d="M465,620 Q370,640 260,650" opacity="0.75"/>
+      <path d="M485,585 Q395,540 310,490" opacity="0.65"/>
+      <path d="M460,630 Q360,660 250,670" opacity="0.6"/>
+      <!-- Right side -->
+      <path d="M544,590 Q624,550 724,500" opacity="0.75"/>
+      <path d="M549,600 Q634,580 744,550" opacity="0.8"/>
+      <path d="M554,610 Q644,610 754,600" opacity="0.7"/>
+      <path d="M559,620 Q654,640 764,650" opacity="0.75"/>
+      <path d="M539,585 Q629,540 714,490" opacity="0.65"/>
+      <path d="M564,630 Q664,660 774,670" opacity="0.6"/>
+    </g>
+
+    <!-- Fur Strands (high density for realism and lighting effects) -->
+    <!-- Forehead fur -->
+    <g stroke-linecap="round">
+      <?php for ($i = 0; $i < 150; $i++) {
+          $x1 = 450 + (rand(0, 120) - 60) + $i * 0.5;
+          $y1 = 250 + (rand(0, 80) - 40) + $i * 0.1;
+          $cx = $x1 + rand(-20, 20);
+          $cy = $y1 + rand(-30, 30);
+          $x2 = $x1 + rand(-10, 10);
+          $y2 = $y1 + rand(20, 40);
+          $opacity = (rand(60, 100) / 100);
+          $width = (rand(5, 20) / 10);
+          $color = (rand(0, 1) == 0 ? "url(#furLight)" : "url(#furBase)");
+          echo "<path d='M{$x1},{$y1} Q{$cx},{$cy} {$x2},{$y2}' stroke='{$color}' stroke-width='{$width}' opacity='{$opacity}'/>";
+      } ?>
+    </g>
+
+    <!-- Around Left Eye Fur -->
+    <g stroke-linecap="round">
+      <?php for ($i = 0; $i < 200; $i++) {
+          $x1 = 380 + rand(-40, 40);
+          $y1 = 370 + rand(-40, 40);
+          $x2 = $x1 + rand(-15, 15);
+          $y2 = $y1 + rand(10, 30);
+          $cx = ($x1 + $x2) / 2 + rand(-10, 10);
+          $cy = ($y1 + $y2) / 2 + rand(-15, 15);
+          $opacity = (rand(60, 100) / 100);
+          $width = (rand(5, 20) / 10);
+          $color = (rand(0, 1) == 0 ? "url(#furLight)" : "url(#furBase)");
+          echo "<path d='M{$x1},{$y1} Q{$cx},{$cy} {$x2},{$y2}' stroke='{$color}' stroke-width='{$width}' opacity='{$opacity}'/>";
+      } ?>
+    </g>
+
+    <!-- Around Right Eye Fur -->
+    <g stroke-linecap="round">
+      <?php for ($i = 0; $i < 200; $i++) {
+          $x1 = 600 + rand(-40, 40);
+          $y1 = 380 + rand(-40, 40);
+          $x2 = $x1 + rand(-15, 15);
+          $y2 = $y1 + rand(10, 30);
+          $cx = ($x1 + $x2) / 2 + rand(-10, 10);
+          $cy = ($y1 + $y2) / 2 + rand(-15, 15);
+          $opacity = (rand(60, 100) / 100);
+          $width = (rand(5, 20) / 10);
+          $color = (rand(0, 1) == 0 ? "url(#furLight)" : "url(#furBase)");
+          echo "<path d='M{$x1},{$y1} Q{$cx},{$cy} {$x2},{$y2}' stroke='{$color}' stroke-width='{$width}' opacity='{$opacity}'/>";
+      } ?>
+    </g>
+
+    <!-- Muzzle Fur -->
+    <g stroke-linecap="round">
+      <?php for ($i = 0; $i < 300; $i++) {
+          $x1 = 512 + rand(-100, 100);
+          $y1 = 500 + rand(-50, 100);
+          $x2 = $x1 + rand(-10, 10);
+          $y2 = $y1 + rand(10, 25);
+          $cx = ($x1 + $x2) / 2 + rand(-8, 8);
+          $cy = ($y1 + $y2) / 2 + rand(-10, 10);
+          $opacity = (rand(70, 100) / 100);
+          $width = (rand(5, 18) / 10);
+          $color = (rand(0, 2) == 0 ? "url(#furHighlight)" : (rand(0,1)==0 ? "url(#furLight)" : "url(#furBase)"));
+          echo "<path d='M{$x1},{$y1} Q{$cx},{$cy} {$x2},{$y2}' stroke='{$color}' stroke-width='{$width}' opacity='{$opacity}'/>";
+      } ?>
+    </g>
+
+    <!-- Cheek Fur -->
+    <g stroke-linecap="round">
+      <?php for ($i = 0; $i < 400; $i++) {
+          $isLeft = rand(0, 1);
+          $base_x = $isLeft ? 400 : 624;
+          $x1 = $base_x + rand(-70, 70);
+          $y1 = 450 + rand(-30, 150);
+          $x2 = $x1 + rand($isLeft ? -10 : 10, $isLeft ? -30 : 30);
+          $y2 = $y1 + rand(15, 40);
+          $cx = ($x1 + $x2) / 2 + rand(-15, 15);
+          $cy = ($y1 + $y2) / 2 + rand(-20, 20);
+          $opacity = (rand(50, 90) / 100);
+          $width = (rand(8, 25) / 10);
+          $color = (rand(0, 2) == 0 ? "url(#furDark)" : "url(#furBase)");
+          echo "<path d='M{$x1},{$y1} Q{$cx},{$cy} {$x2},{$y2}' stroke='{$color}' stroke-width='{$width}' opacity='{$opacity}'/>";
+      } ?>
+    </g>
+
+    <!-- General Face Fur -->
+    <g stroke-linecap="round">
+      <?php for ($i = 0; $i < 500; $i++) {
+          $x1 = rand(250, 750);
+          $y1 = rand(300, 750);
+          $x2 = $x1 + rand(-20, 20);
+          $y2 = $y1 + rand(10, 30);
+          $cx = ($x1 + $x2) / 2 + rand(-10, 10);
+          $cy = ($y1 + $y2) / 2 + rand(-15, 15);
+          $opacity = (rand(40, 80) / 100);
+          $width = (rand(8, 25) / 10);
+          $color = (rand(0, 1) == 0 ? "url(#furBase)" : "url(#furDark)");
+          echo "<path d='M{$x1},{$y1} Q{$cx},{$cy} {$x2},{$y2}' stroke='{$color}' stroke-width='{$width}' opacity='{$opacity}'/>";
+      } ?>
+    </g>
+
+    <!-- Final Highlights and Shadows for depth -->
+    <path d="M512,150 C700,50 850,250 850,450 C850,650 700,850 512,850 C324,850 174,650 174,450 C174,250 324,50 512,150 Z"
+          fill="rgba(0,0,0,0.1)" filter="url(#softBlur)"/>
+    <path d="M512,150 C700,50 850,250 850,450 C850,650 700,850 512,850 C324,850 174,650 174,450 C174,250 324,50 512,150 Z"
+          fill="rgba(255,255,200,0.05)" filter="url(#softBlur)"/>
+
+  </g>
+</svg>

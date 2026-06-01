@@ -1,0 +1,317 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Background Gradient for sky and distant haze -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="70%" stop-color="#101020"/>
+      <stop offset="100%" stop-color="#202035"/>
+    </linearGradient>
+
+    <!-- Street asphalt base color -->
+    <linearGradient id="asphaltGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#151515"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+
+    <!-- Wet asphalt reflection base -->
+    <radialGradient id="wetReflect" cx="50%" cy="100%" r="100%" fx="50%" fy="100%">
+        <stop offset="0%" stop-color="#303040" stop-opacity="0.8"/>
+        <stop offset="50%" stop-color="#101015" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#000000" stop-opacity="0.95"/>
+    </radialGradient>
+
+    <!-- Carbon Fiber Pattern -->
+    <pattern id="carbonFiber" patternUnits="userSpaceOnUse" width="10" height="10">
+      <rect x="0" y="0" width="10" height="10" fill="#101010"/>
+      <path d="M0,5 L5,0 L10,5 L5,10 Z" fill="#252525" opacity="0.8"/>
+      <path d="M0,0 L0,10 M0,5 L5,0 M5,10 L10,5 M10,0 L10,10" stroke="#000" stroke-width="0.5" opacity="0.6"/>
+    </pattern>
+
+    <!-- General Blur for background elements / bokeh -->
+    <filter id="bgBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+    </filter>
+    <filter id="mediumBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <filter id="lightBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
+    </filter>
+    <filter id="strongBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+    </filter>
+
+    <!-- Volumetric Steam Filter -->
+    <filter id="volumetricSteam" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.05" numOctaves="3" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#FFFFFF" surfaceScale="5" result="light">
+        <fePointLight x="512" y="700" z="50"/>
+      </feDiffuseLighting>
+      <feComposite in="SourceGraphic" in2="light" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      <feGaussianBlur stdDeviation="15"/>
+    </filter>
+
+    <!-- Car body PBR / reflective filter -->
+    <filter id="carBodyReflect">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blurBase"/>
+      <feSpecularLighting in="blurBase" lighting-color="#FFFFFF" surfaceScale="2" specularConstant="0.8" specularExponent="30" result="specularOut">
+        <feDistantLight azimuth="235" elevation="60"/>
+      </feSpecularLighting>
+      <feComposite in="SourceGraphic" in2="specularOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      <feBlend in="SourceGraphic" in2="specularOut" mode="screen"/>
+    </filter>
+
+    <!-- Wet Asphalt Reflection Filter -->
+    <filter id="wetAsphaltReflect">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blurSurface"/>
+      <feSpecularLighting in="blurSurface" lighting-color="#FFFFFF" surfaceScale="5" specularConstant="0.7" specularExponent="20" result="specularOut">
+        <feDistantLight azimuth="225" elevation="45"/>
+      </feSpecularLighting>
+      <feComposite in="SourceGraphic" in2="specularOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      <feBlend in="SourceGraphic" in2="specularOut" mode="screen"/>
+    </filter>
+
+    <!-- Neon Glow Filter (electric blue) -->
+    <filter id="neonGlowBlue">
+      <feFlood flood-color="rgba(0, 200, 255, 0.7)" result="flood"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="comp"/>
+      <feGaussianBlur in="comp" stdDeviation="4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Neon Glow Filter (magenta) -->
+    <filter id="neonGlowMagenta">
+      <feFlood flood-color="rgba(255, 0, 255, 0.7)" result="flood"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="comp"/>
+      <feGaussianBlur in="comp" stdDeviation="4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Neon Glow Filter (red) -->
+    <filter id="neonGlowRed">
+      <feFlood flood-color="rgba(255, 0, 0, 0.7)" result="flood"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="comp"/>
+      <feGaussianBlur in="comp" stdDeviation="4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Neon Glow Filter (green) -->
+    <filter id="neonGlowGreen">
+      <feFlood flood-color="rgba(0, 255, 0, 0.7)" result="flood"/>
+      <feComposite in="flood" in2="SourceGraphic" operator="in" result="comp"/>
+      <feGaussianBlur in="comp" stdDeviation="4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Lens Flare Filter -->
+    <filter id="lensFlare">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur"/>
+      <feOffset dx="10" dy="10" in="blur" result="offset1"/>
+      <feOffset dx="-10" dy="-10" in="blur" result="offset2"/>
+      <feOffset dx="5" dy="-5" in="blur" result="offset3"/>
+      <feOffset dx="-5" dy="5" in="blur" result="offset4"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="offset1"/>
+        <feMergeNode in="offset2"/>
+        <feMergeNode in="offset3"/>
+        <feMergeNode in="offset4"/>
+      </feMerge>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+    </filter>
+
+  </defs>
+
+  <!-- Background Sky and Distant City Glow -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#skyGradient)"/>
+
+  <!-- Distant City Haze/Lights -->
+  <g filter="url(#bgBlur)">
+    <circle cx="512" cy="200" r="150" fill="rgba(20, 20, 40, 0.3)"/>
+    <rect x="0" y="0" width="1024" height="400" fill="url(#skyGradient)" opacity="0.2"/>
+    <path d="M0,450 C200,400 800,400 1024,450 L1024,0 L0,0 Z" fill="rgba(10,10,20,0.5)"/>
+  </g>
+
+  <!-- Skyscrapers - Back Layer (blurred) -->
+  <g filter="url(#bgBlur)">
+    <rect x="50" y="150" width="100" height="450" fill="#101018" opacity="0.8"/>
+    <rect x="200" y="100" width="120" height="500" fill="#151520" opacity="0.8"/>
+    <rect x="350" y="180" width="80" height="420" fill="#12121A" opacity="0.8"/>
+    <rect x="500" y="80" width="150" height="520" fill="#181825" opacity="0.8"/>
+    <rect x="700" y="130" width="110" height="470" fill="#13131B" opacity="0.8"/>
+    <rect x="850" y="160" width="90" height="440" fill="#161622" opacity="0.8"/>
+  </g>
+
+  <!-- Skyscrapers - Mid Layer (less blurred) -->
+  <g filter="url(#mediumBlur)">
+    <rect x="30" y="300" width="80" height="320" fill="#181822" opacity="0.9"/>
+    <rect x="150" y="250" width="100" height="370" fill="#1A1A25" opacity="0.9"/>
+    <rect x="300" y="350" width="70" height="270" fill="#171720" opacity="0.9"/>
+    <rect x="450" y="200" width="120" height="420" fill="#1C1C28" opacity="0.9"/>
+    <rect x="620" y="280" width="90" height="340" fill="#191923" opacity="0.9"/>
+    <rect x="780" y="220" width="110" height="400" fill="#1B1B26" opacity="0.9"/>
+    <rect x="910" y="310" width="70" height="310" fill="#14141E" opacity="0.9"/>
+  </g>
+
+  <!-- Skyscrapers - Foreground (more detailed, neon signs) -->
+  <g>
+    <path d="M0,620 L0,300 C50,250 150,200 250,250 C350,300 450,200 550,250 C650,300 750,200 850,250 C950,300 1024,350 1024,400 L1024,620 Z" fill="#101015"/>
+
+    <!-- Neon signs and windows -->
+    <!-- Building 1 -->
+    <rect x="70" y="400" width="20" height="50" fill="rgba(0,180,255,0.2)" filter="url(#neonGlowBlue)"/>
+    <rect x="75" y="460" width="15" height="30" fill="rgba(255,0,255,0.2)" filter="url(#neonGlowMagenta)"/>
+    <rect x="50" y="500" width="40" height="20" fill="rgba(255,200,0,0.2)" filter="url(#neonGlowRed)"/>
+    <rect x="60" y="350" width="30" height="10" fill="rgba(0,255,0,0.2)" filter="url(#neonGlowGreen)"/>
+
+    <!-- Building 2 -->
+    <rect x="200" y="380" width="30" height="60" fill="rgba(255,0,0,0.2)" filter="url(#neonGlowRed)"/>
+    <rect x="210" y="450" width="20" height="40" fill="rgba(0,255,0,0.2)" filter="url(#neonGlowGreen)"/>
+    <rect x="180" y="490" width="50" height="25" fill="rgba(0,180,255,0.2)" filter="url(#neonGlowBlue)"/>
+    <rect x="220" y="330" width="15" height="20" fill="rgba(255,0,255,0.2)" filter="url(#neonGlowMagenta)"/>
+
+    <!-- Building 3 (digital billboard) -->
+    <rect x="350" y="350" width="80" height="60" fill="url(#asphaltGradient)" rx="5" ry="5"/>
+    <rect x="355" y="355" width="70" height="50" fill="rgba(0,100,200,0.3)" filter="url(#neonGlowBlue)"/>
+    <rect x="360" y="360" width="60" height="40" fill="rgba(200,0,200,0.3)" filter="url(#neonGlowMagenta)"/>
+
+    <!-- Building 4 -->
+    <rect x="500" y="370" width="25" height="50" fill="rgba(0,255,0,0.2)" filter="url(#neonGlowGreen)"/>
+    <rect x="530" y="390" width="20" height="30" fill="rgba(255,0,0,0.2)" filter="url(#neonGlowRed)"/>
+    <rect x="510" y="430" width="30" height="40" fill="rgba(0,180,255,0.2)" filter="url(#neonGlowBlue)"/>
+
+    <!-- More scattered lights -->
+    <circle cx="100" cy="550" r="3" fill="white" opacity="0.8" filter="url(#lightBlur)"/>
+    <circle cx="280" cy="580" r="4" fill="yellow" opacity="0.8" filter="url(#lightBlur)"/>
+    <circle cx="400" cy="560" r="3" fill="cyan" opacity="0.8" filter="url(#lightBlur)"/>
+    <circle cx="600" cy="590" r="5" fill="magenta" opacity="0.8" filter="url(#lightBlur)"/>
+    <circle cx="750" cy="570" r="3" fill="white" opacity="0.8" filter="url(#lightBlur)"/>
+    <circle cx="900" cy="550" r="4" fill="yellow" opacity="0.8" filter="url(#lightBlur)"/>
+  </g>
+
+
+  <!-- Street - Base Asphalt -->
+  <rect x="0" y="600" width="1024" height="424" fill="url(#asphaltGradient)"/>
+
+  <!-- Wet Asphalt Surface -->
+  <rect x="0" y="600" width="1024" height="424" fill="url(#wetReflect)" filter="url(#wetAsphaltReflect)"/>
+
+  <!-- Street Reflections (simplified - will be many, many shapes for real complexity) -->
+  <g transform="translate(0, 600) scale(1, -0.6)" opacity="0.6">
+    <g transform="translate(0, -1024)">
+      <!-- Reflections of skyscraper neons -->
+      <rect x="70" y="400" width="20" height="50" fill="rgba(0,180,255,0.3)" filter="url(#strongBlur)"/>
+      <rect x="75" y="460" width="15" height="30" fill="rgba(255,0,255,0.3)" filter="url(#strongBlur)"/>
+      <rect x="50" y="500" width="40" height="20" fill="rgba(255,200,0,0.3)" filter="url(#strongBlur)"/>
+      <rect x="60" y="350" width="30" height="10" fill="rgba(0,255,0,0.3)" filter="url(#strongBlur)"/>
+
+      <rect x="200" y="380" width="30" height="60" fill="rgba(255,0,0,0.3)" filter="url(#strongBlur)"/>
+      <rect x="210" y="450" width="20" height="40" fill="rgba(0,255,0,0.3)" filter="url(#strongBlur)"/>
+      <rect x="180" y="490" width="50" height="25" fill="rgba(0,180,255,0.3)" filter="url(#strongBlur)"/>
+      <rect x="220" y="330" width="15" height="20" fill="rgba(255,0,255,0.3)" filter="url(#strongBlur)"/>
+
+      <rect x="355" y="355" width="70" height="50" fill="rgba(0,100,200,0.3)" filter="url(#strongBlur)"/>
+      <rect x="360" y="360" width="60" height="40" fill="rgba(200,0,200,0.3)" filter="url(#strongBlur)"/>
+
+      <rect x="500" y="370" width="25" height="50" fill="rgba(0,255,0,0.3)" filter="url(#strongBlur)"/>
+      <rect x="530" y="390" width="20" height="30" fill="rgba(255,0,0,0.3)" filter="url(#strongBlur)"/>
+      <rect x="510" y="430" width="30" height="40" fill="rgba(0,180,255,0.3)" filter="url(#strongBlur)"/>
+    </g>
+  </g>
+
+  <!-- Ripples and Puddles -->
+  <ellipse cx="512" cy="700" rx="300" ry="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2" filter="url(#lightBlur)"/>
+  <ellipse cx="400" cy="850" rx="150" ry="40" fill="rgba(0,0,0,0.1)" stroke="rgba(255,255,255,0.08)" stroke-width="1" filter="url(#lightBlur)"/>
+  <ellipse cx="650" cy="900" rx="200" ry="50" fill="rgba(0,0,0,0.1)" stroke="rgba(255,255,255,0.08)" stroke-width="1" filter="url(#lightBlur)"/>
+
+  <!-- Volumetric Steam from Manholes -->
+  <g filter="url(#volumetricSteam)">
+    <ellipse cx="300" cy="950" rx="60" ry="20" fill="rgba(50,50,70,0.4)" opacity="0.7"/>
+    <ellipse cx="700" cy="980" rx="70" ry="25" fill="rgba(50,50,70,0.4)" opacity="0.7"/>
+    <ellipse cx="500" cy="800" rx="50" ry="15" fill="rgba(50,50,70,0.3)" opacity="0.6"/>
+  </g>
+
+  <!-- THE CAR - Main Subject -->
+  <g transform="translate(512, 720) scale(0.6) rotate(-10)">
+    <!-- Base Car Shadow/Underglow -->
+    <path d="M-180,100 C-250,150 250,150 180,100 L180,-50 C100,-100 -100,-100 -180,-50 Z" fill="rgba(0,0,0,0.5)" filter="url(#strongBlur)"/>
+
+    <!-- Main Body Shape - Carbon Fiber -->
+    <path id="carBody" d="M-200,0 C-250,-50 -250,-150 -150,-200 L150,-200 C250,-150 250,-50 200,0 L180,50 C100,80 -100,80 -180,50 Z"
+          fill="url(#carbonFiber)" filter="url(#carBodyReflect)"/>
+
+    <!-- Aerodynamic sculpting/highlights -->
+    <path d="M-180,-10 C-150,-40 -150,-100 -80,-140 L80,-140 C150,-100 150,-40 180,-10 L150,20 C100,40 -100,40 -150,20 Z"
+          fill="rgba(255,255,255,0.05)" filter="url(#lightBlur)"/>
+    <path d="M-190,-20 C-160,-60 -160,-120 -90,-160 L90,-160 C160,-120 160,-60 190,-20 L160,10 C100,30 -100,30 -160,10 Z"
+          fill="rgba(0,0,0,0.1)"/>
+
+    <!-- Tinted Glass Cockpit -->
+    <path d="M-120,-120 C-100,-180 100,-180 120,-120 L100,-80 C50,-100 -50,-100 -100,-80 Z"
+          fill="rgba(0,10,20,0.8)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    <!-- Cockpit reflections -->
+    <path d="M-100,-100 C-80,-140 80,-140 100,-100 L80,-70 C40,-80 -40,-80 -80,-70 Z"
+          fill="url(#skyGradient)" opacity="0.3"/>
+    <path d="M-80,-130 C-70,-150 70,-150 80,-130" stroke="rgba(255,255,255,0.2)" stroke-width="2" filter="url(#lightBlur)"/>
+
+    <!-- LED Light Strips (Electric Blue & Magenta Accents) -->
+    <!-- Front/Side Blue LED -->
+    <path d="M-200,0 L-180,10 L-170,10 L-190,0 Z" fill="rgb(0,200,255)" filter="url(#neonGlowBlue)"/>
+    <path d="M200,0 L180,10 L170,10 L190,0 Z" fill="rgb(0,200,255)" filter="url(#neonGlowBlue)"/>
+    <!-- Headlight Blue -->
+    <ellipse cx="-160" cy="-20" rx="20" ry="8" fill="rgb(0,200,255)" filter="url(#neonGlowBlue)"/>
+    <ellipse cx="160" cy="-20" rx="20" ry="8" fill="rgb(0,200,255)" filter="url(#neonGlowBlue)"/>
+    <!-- Rear/Side Magenta LED (simulated on side) -->
+    <path d="M-150,50 L-140,40 L-130,45 L-140,55 Z" fill="rgb(255,0,255)" filter="url(#neonGlowMagenta)"/>
+    <path d="M150,50 L140,40 L130,45 L140,55 Z" fill="rgb(255,0,255)" filter="url(#neonGlowMagenta)"/>
+
+    <!-- Wheels (simplified for perspective) -->
+    <ellipse cx="-130" cy="60" rx="30" ry="20" fill="#050505" stroke="#333" stroke-width="1"/>
+    <ellipse cx="-130" cy="60" rx="20" ry="15" fill="#151515" stroke="#555" stroke-width="1"/>
+    <circle cx="-130" cy="60" r="10" fill="#252525"/>
+    <circle cx="-130" cy="60" r="3" fill="#FFF" opacity="0.5" filter="url(#lightBlur)"/>
+
+    <ellipse cx="130" cy="60" rx="30" ry="20" fill="#050505" stroke="#333" stroke-width="1"/>
+    <ellipse cx="130" cy="60" rx="20" ry="15" fill="#151515" stroke="#555" stroke-width="1"/>
+    <circle cx="130" cy="60" r="10" fill="#252525"/>
+    <circle cx="130" cy="60" r="3" fill="#FFF" opacity="0.5" filter="url(#lightBlur)"/>
+
+    <!-- Car Reflections from Street Neons -->
+    <g transform="translate(0, -50)">
+      <rect x="-100" y="0" width="20" height="10" fill="rgba(0,200,255,0.4)" filter="url(#lightBlur)"/>
+      <rect x="50" y="10" width="30" height="15" fill="rgba(255,0,255,0.4)" filter="url(#lightBlur)"/>
+      <rect x="-80" y="20" width="15" height="8" fill="rgba(255,0,0,0.4)" filter="url(#lightBlur)"/>
+      <rect x="0" y="0" width="25" height="12" fill="rgba(0,255,0,0.4)" filter="url(#lightBlur)"/>
+    </g>
+  </g>
+
+  <!-- Foreground Water Ripples / Shine -->
+  <g opacity="0.4" filter="url(#lightBlur)">
+    <path d="M0,900 C100,880 200,920 300,900 C400,880 500,920 600,900 C700,880 800,920 900,900 C1000,880 1024,920 1024,950 L1024,1024 L0,1024 Z"
+          fill="rgba(255,255,255,0.05)"/>
+    <path d="M0,980 C150,960 300,1000 450,980 C600,960 750,1000 900,980 C1000,960 1024,980 1024,1000 L1024,1024 L0,1024 Z"
+          fill="rgba(255,255,255,0.03)"/>
+  </g>
+
+  <!-- Subtle Lens Flare -->
+  <circle cx="200" cy="150" r="20" fill="rgba(255,255,255,0.2)" filter="url(#lensFlare)"/>
+  <circle cx="800" cy="180" r="15" fill="rgba(255,255,255,0.15)" filter="url(#lensFlare)"/>
+  <circle cx="512" cy="600" r="25" fill="rgba(255,255,255,0.25)" filter="url(#lensFlare)"/>
+
+
+</svg>

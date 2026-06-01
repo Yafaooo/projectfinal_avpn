@@ -1,0 +1,323 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Filters for atmospheric and lighting effects, simulating ray tracing and volumetric lighting -->
+    <filter id="fNightBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blurredBg"/>
+      <feComponentTransfer in="blurredBg" result="dimmedBg">
+        <feFuncA type="linear" slope="0.7"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="fDeepBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="deepBlurred"/>
+      <feComponentTransfer in="deepBlurred" result="dimmedDeep">
+        <feFuncA type="linear" slope="0.6"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="fGlowWarm" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="glowBlur"/>
+      <feFlood flood-color="#ffcc66" flood-opacity="0.8" result="glowColor"/>
+      <feComposite in="glowColor" in2="glowBlur" operator="in" result="glowA"/>
+      <feMerge>
+        <feMergeNode in="glowA"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fGlowSubtle" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="glowBlur"/>
+      <feFlood flood-color="#ffccaa" flood-opacity="0.5" result="glowColor"/>
+      <feComposite in="glowColor" in2="glowBlur" operator="in" result="glowA"/>
+      <feMerge>
+        <feMergeNode in="glowA"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fSteamEffect" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.05" numOctaves="3" seed="0" result="noise"/>
+      <feOffset dx="0" dy="-5" in="noise" result="offsetNoise"/>
+      <feGaussianBlur in="offsetNoise" stdDeviation="10" result="blurredNoise"/>
+      <feComponentTransfer in="blurredNoise" result="alphaNoise">
+        <feFuncA type="linear" slope="0.5" intercept="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="alphaNoise"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fTextureRough" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="1" result="textureNoise"/>
+      <feDiffuseLighting in="textureNoise" surfaceScale="5" lightingColor="#fff" result="light"/>
+      <feComposite in="SourceGraphic" in2="light" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+    <filter id="fDOF" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+
+    <!-- Gradients for realistic lighting and materials -->
+    <linearGradient id="gNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050a10"/>
+      <stop offset="100%" stop-color="#152030"/>
+    </linearGradient>
+    <radialGradient id="gLampLight" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ffffaa"/>
+      <stop offset="20%" stop-color="#ffcc66"/>
+      <stop offset="50%" stop-color="#e08020"/>
+      <stop offset="100%" stop-color="rgba(80,40,10,0)"/>
+    </radialGradient>
+    <linearGradient id="gWetGround" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="50%" stop-color="#222"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="gMetalDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="20%" stop-color="#6a6a6a"/>
+      <stop offset="50%" stop-color="#4a4a4a"/>
+      <stop offset="80%" stop-color="#6a6a6a"/>
+      <stop offset="100%" stop-color="#3a3a3a"/>
+    </linearGradient>
+    <linearGradient id="gFabricDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#401010"/>
+      <stop offset="50%" stop-color="#802020"/>
+      <stop offset="100%" stop-color="#401010"/>
+    </linearGradient>
+    <linearGradient id="gWoodDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#402000"/>
+      <stop offset="50%" stop-color="#603000"/>
+      <stop offset="100%" stop-color="#402000"/>
+    </linearGradient>
+    <linearGradient id="gSkewerBrown" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#8B4513"/>
+        <stop offset="100%" stop-color="#5A2D0C"/>
+    </linearGradient>
+    <radialGradient id="gFoodHighlight" cx="50%" cy="50%" r="50%" fx="70%" fy="30%">
+      <stop offset="0%" stop-color="rgba(255,255,200,0.8)"/>
+      <stop offset="100%" stop-color="rgba(255,255,200,0)"/>
+    </radialGradient>
+    <linearGradient id="gPersonShirt" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#1A2A3A"/>
+        <stop offset="100%" stop-color="#0A1520"/>
+    </linearGradient>
+    <linearGradient id="gPersonSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#C09070"/>
+        <stop offset="100%" stop-color="#906040"/>
+    </linearGradient>
+
+    <!-- Patterns for professional textures -->
+    <pattern id="pFabricDetail" patternUnits="userSpaceOnUse" width="10" height="10">
+      <path d="M0,0 L10,10 M10,0 L0,10" stroke="#701010" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <pattern id="pWoodGrainDetail" patternUnits="userSpaceOnUse" width="20" height="20">
+      <path d="M0,5 C5,0 15,0 20,5 S15,10 0,15 Z" fill="#301500" opacity="0.4"/>
+      <path d="M0,12 C5,7 15,7 20,12 S15,17 0,22 Z" fill="#301500" opacity="0.3"/>
+    </pattern>
+    <pattern id="pAsphaltTexture" patternUnits="userSpaceOnUse" width="5" height="5">
+        <circle cx="2" cy="2" r="0.5" fill="#333" opacity="0.3"/>
+        <circle cx="4" cy="4" r="0.3" fill="#111" opacity="0.2"/>
+    </pattern>
+
+    <!-- Clipping paths for complex shapes -->
+    <clipPath id="cpStallRoof">
+      <path d="M50 350 L950 350 L1000 650 L0 650 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background: Night sky -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#gNightSky)"/>
+
+  <!-- Distant very blurred lights (city haze) -->
+  <g filter="url(#fDeepBlur)" opacity="0.4">
+    <circle cx="850" cy="180" r="15" fill="#aaccff"/>
+    <circle cx="150" cy="220" r="12" fill="#ffccaa"/>
+    <circle cx="700" cy="250" r="10" fill="#ffffcc"/>
+    <rect x="50" y="100" width="50" height="80" fill="#ffddaa"/>
+    <rect x="900" y="50" width="40" height="70" fill="#aaffaa"/>
+  </g>
+
+  <!-- Volumetric fog/haze at ground level -->
+  <ellipse cx="512" cy="980" rx="800" ry="300" fill="white" opacity="0.08" filter="url(#fDeepBlur)"/>
+
+  <!-- Ground: Wet asphalt -->
+  <rect x="0" y="600" width="1024" height="424" fill="url(#gWetGround)" style="filter:url(#fTextureRough);"/>
+  <rect x="0" y="600" width="1024" height="424" fill="url(#pAsphaltTexture)"/>
+
+  <!-- Reflections on wet ground -->
+  <g opacity="0.2">
+      <path d="M450 750 L500 650 L550 750 Z" fill="#ffcc66" filter="url(#fDeepBlur)"/>
+      <path d="M300 800 L350 700 L400 800 Z" fill="#ffcc66" filter="url(#fDeepBlur)"/>
+      <path d="M600 850 L650 750 L700 850 Z" fill="#ffffaa" filter="url(#fDeepBlur)"/>
+      <path d="M200 900 L250 800 L300 900 Z" fill="#e08020" filter="url(#fDeepBlur)"/>
+  </g>
+
+  <!-- Stall Structure -->
+  <g id="stallBody" transform="translate(0, -50)">
+    <!-- Back wall (fabric) -->
+    <rect x="80" y="380" width="860" height="300" fill="url(#gFabricDark)" clip-path="url(#cpStallRoof)"/>
+    <rect x="80" y="380" width="860" height="300" fill="url(#pFabricDetail)" opacity="0.3" clip-path="url(#cpStallRoof)"/>
+    <!-- Roof canopy (front edge) -->
+    <path d="M50 350 L950 350 L970 450 L30 450 Z" fill="url(#gFabricDark)" opacity="0.9"/>
+    <path d="M50 350 L950 350 L970 450 L30 450 Z" fill="url(#pFabricDetail)" opacity="0.4"/>
+
+    <!-- Wooden counter -->
+    <path d="M120 620 L900 620 L920 680 L100 680 Z" fill="url(#gWoodDark)" style="filter:url(#fTextureRough);"/>
+    <path d="M120 620 L900 620 L920 680 L100 680 Z" fill="url(#pWoodGrainDetail)" opacity="0.6"/>
+    <rect x="110" y="680" width="800" height="80" fill="#301500"/> <!-- Undercounter -->
+    <rect x="110" y="680" width="800" height="80" fill="url(#pWoodGrainDetail)" opacity="0.4"/>
+
+    <!-- Support poles -->
+    <rect x="100" y="350" width="15" height="300" fill="url(#gWoodDark)" style="filter:url(#fTextureRough);"/>
+    <rect x="900" y="350" width="15" height="300" fill="url(#gWoodDark)" style="filter:url(#fTextureRough);"/>
+    <rect x="100" y="350" width="15" height="300" fill="url(#pWoodGrainDetail)" opacity="0.5"/>
+    <rect x="900" y="350" width="15" height="300" fill="url(#pWoodGrainDetail)" opacity="0.5"/>
+  </g>
+
+  <!-- Main Light Source (Ray Tracing simulation) -->
+  <circle cx="512" cy="380" r="60" fill="url(#gLampLight)" filter="url(#fGlowWarm)"/>
+  <circle cx="480" cy="390" r="40" fill="url(#gLampLight)" filter="url(#fGlowSubtle)"/>
+
+  <!-- Volumetric light rays (simulated) -->
+  <g filter="url(#fGlowSubtle)" opacity="0.15">
+    <path d="M512 380 L300 750 L724 750 Z" fill="white" transform="skewX(5)" opacity="0.8"/>
+    <path d="M512 380 L350 700 L674 700 Z" fill="white" transform="skewX(-8)" opacity="0.7"/>
+    <path d="M512 380 L450 650 L574 650 Z" fill="white" transform="skewX(3)" opacity="0.9"/>
+  </g>
+
+  <!-- Food items and cooking station -->
+  <g id="cookingStation">
+    <!-- Grill/Stove -->
+    <rect x="300" y="590" width="450" height="40" fill="#333" rx="5" ry="5"/>
+    <rect x="300" y="590" width="450" height="40" fill="url(#gMetalDark)" opacity="0.8"/>
+    <rect x="310" y="580" width="430" height="10" fill="#222"/> <!-- Top edge -->
+    <rect x="310" y="580" width="430" height="10" fill="url(#gMetalDark)" opacity="0.7"/>
+
+    <!-- Wok with metal gleam -->
+    <path d="M350 585 C370 560 410 560 430 585 L440 600 L340 600 Z" fill="#555" style="filter:url(#fTextureRough);"/>
+    <path d="M350 585 C370 560 410 560 430 585 L440 600 L340 600 Z" fill="url(#gMetalDark)" opacity="0.9"/>
+    <circle cx="390" cy="570" r="10" fill="url(#gFoodHighlight)" opacity="0.5"/> <!-- Oil gleam -->
+    <g filter="url(#fSteamEffect)">
+        <path d="M390 570 C370 550 410 550 390 530 Z" fill="white" opacity="0.2"/>
+        <path d="M395 575 C380 555 420 555 395 535 Z" fill="white" opacity="0.15"/>
+    </g>
+
+    <!-- Satay skewers on grill with professional texture and slight animation -->
+    <g id="satayGroup">
+      <defs>
+        <g id="sataySkewer">
+          <rect x="0" y="0" width="3" height="30" fill="url(#gSkewerBrown)"/> <!-- Stick -->
+          <circle cx="1.5" cy="5" r="3" fill="#8B0000"/> <!-- Meat piece 1 -->
+          <circle cx="1.5" cy="15" r="3.5" fill="#A02020"/> <!-- Meat piece 2 -->
+          <circle cx="1.5" cy="25" r="3" fill="#CD5C5C"/> <!-- Meat piece 3 -->
+        </g>
+      </defs>
+      <use xlink:href="#sataySkewer" x="380" y="560" transform="rotate(5, 381.5, 575)">
+        <animate attributeName="opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite" begin="0s"/>
+      </use>
+      <use xlink:href="#sataySkewer" x="420" y="565" transform="rotate(-3, 421.5, 580)">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" begin="0.2s" repeatCount="indefinite"/>
+      </use>
+      <use xlink:href="#sataySkewer" x="460" y="555" transform="rotate(7, 461.5, 570)">
+        <animate attributeName="opacity" values="1;0.9;1" dur="2s" begin="0.4s" repeatCount="indefinite"/>
+      </use>
+      <use xlink:href="#sataySkewer" x="500" y="560" transform="rotate(-2, 501.5, 575)"/>
+      <use xlink:href="#sataySkewer" x="540" y="565" transform="rotate(4, 541.5, 580)"/>
+      <use xlink:href="#sataySkewer" x="580" y="555" transform="rotate(-6, 581.5, 570)"/>
+      <use xlink:href="#sataySkewer" x="620" y="560" transform="rotate(2, 621.5, 575)"/>
+    </g>
+
+    <!-- Bowls of condiments/food -->
+    <defs>
+        <g id="bowlGeneric">
+            <path d="M0 0 C-20 10 -20 30 0 40 C20 30 20 10 0 0 Z" fill="#eee" stroke="#ccc" stroke-width="1" transform="scale(0.8, 1)"/>
+            <path d="M-15 15 C-10 5 10 5 15 15 L10 30 C5 20 -5 20 -10 30 Z" fill="#ccc" transform="scale(0.8, 1)"/>
+            <circle cx="0" cy="15" r="12" fill="#8B4513" transform="scale(0.8, 0.5)"/> <!-- Peanut sauce -->
+            <path d="M-10 10 C-5 5 5 5 10 10" stroke="#CD5C5C" stroke-width="1" fill="none" opacity="0.8"/> <!-- Chili flakes -->
+        </g>
+    </defs>
+    <use xlink:href="#bowlGeneric" x="250" y="660" transform="scale(0.8)"/>
+    <g transform="translate(780, 670) scale(0.7) rotate(5)">
+        <use xlink:href="#bowlGeneric"/>
+        <circle cx="0" cy="15" r="12" fill="#556B2F" transform="scale(0.8, 0.5)"/> <!-- Green chili sauce -->
+    </g>
+    <g transform="translate(180, 680) scale(0.6) rotate(-10)">
+        <use xlink:href="#bowlGeneric"/>
+        <circle cx="0" cy="15" r="12" fill="#D2B48C" transform="scale(0.8, 0.5)"/> <!-- Rice -->
+    </g>
+
+    <!-- Plates with food garnish -->
+    <ellipse cx="680" cy="670" rx="40" ry="10" fill="#f8f8f8" stroke="#ccc" stroke-width="1"/>
+    <ellipse cx="680" cy="670" rx="35" ry="8" fill="#fff" />
+    <ellipse cx="680" cy="670" rx="25" ry="6" fill="#f0f0f0" />
+    <path d="M660 660 L670 655 L680 660 C675 665 665 665 660 660 Z" fill="#6B8E23" opacity="0.8"/> <!-- Garnish -->
+    <path d="M690 665 L700 660 L710 665 C705 670 695 670 690 665 Z" fill="#DAA520" opacity="0.8"/> <!-- Fried Onion -->
+
+    <ellipse cx="750" cy="680" rx="35" ry="10" fill="#f8f8f8" stroke="#ccc" stroke-width="1" filter="url(#fDOF)"/>
+    <ellipse cx="750" cy="680" rx="30" ry="8" fill="#fff" filter="url(#fDOF)"/>
+  </g>
+
+  <!-- Vendor figure (partially obscured, with fabric fibers and skin pores implied) -->
+  <g id="vendor" transform="translate(780, 580)">
+    <path d="M-30 0 C-40 -80 40 -80 30 0 Z" fill="url(#gPersonShirt)" style="filter:url(#fTextureRough);"/> <!-- Body -->
+    <path d="M0 -70 C-10 -100 10 -100 0 -70 Z" fill="url(#gPersonSkin)" style="filter:url(#fTextureRough);"/> <!-- Head (simplified for context) -->
+    <rect x="-10" y="-85" width="20" height="15" fill="#301500" rx="3" ry="3"/> <!-- Hair/Hat -->
+    <rect x="-35" y="-10" width="20" height="50" fill="#203040" transform="rotate(-10)" filter="url(#fDOF)"/> <!-- Arm -->
+    <rect x="15" y="-5" width="20" height="40" fill="#203040" transform="rotate(5)" filter="url(#fDOF)"/> <!-- Arm -->
+
+    <!-- Hand holding ladle (simplified for focus, with skin texture) -->
+    <circle cx="20" cy="20" r="10" fill="url(#gPersonSkin)" opacity="0.9" filter="url(#fDOF)"/>
+    <path d="M15 20 L25 25 L35 15 L25 10 Z" fill="#888" stroke="#666" stroke-width="2" style="filter:url(#fTextureRough);"/> <!-- Ladle -->
+  </g>
+
+  <!-- Utensils and details on counter -->
+  <g id="counterDetails">
+    <rect x="200" y="650" width="50" height="20" fill="#402000" rx="5" ry="5"/> <!-- Cutting board -->
+    <rect x="200" y="650" width="50" height="20" fill="url(#pWoodGrainDetail)" opacity="0.7"/>
+
+    <path d="M600 660 C610 650 630 650 640 660 L630 670 L610 670 Z" fill="#aaa" stroke="#888" stroke-width="1"/> <!-- Spoon -->
+    <path d="M615 665 L625 675 L635 665 Z" fill="#888" stroke="#666" stroke-width="1" filter="url(#fDOF)"/> <!-- Fork (blurred) -->
+
+    <!-- Sauce bottles (blurred foreground) -->
+    <g filter="url(#fDOF)">
+        <ellipse cx="100" cy="720" rx="20" ry="50" fill="#401010" transform="rotate(-5, 100, 720)"/>
+        <path d="M90 680 L110 680 L115 670 L85 670 Z" fill="#603030"/> <!-- Cap -->
+        <ellipse cx="100" cy="720" rx="15" ry="40" fill="rgba(255,100,100,0.5)"/> <!-- Sauce fill -->
+
+        <ellipse cx="900" cy="730" rx="25" ry="60" fill="#104010" transform="rotate(10, 900, 730)"/>
+        <path d="M885 680 L915 680 L920 670 L880 670 Z" fill="#306030"/> <!-- Cap -->
+        <ellipse cx="900" cy="730" rx="20" ry="50" fill="rgba(100,255,100,0.5)"/> <!-- Sauce fill -->
+    </g>
+  </g>
+
+  <!-- Further background elements, blurred for depth -->
+  <g filter="url(#fNightBlur)" opacity="0.3">
+    <rect x="50" y="750" width="900" height="200" fill="#152030"/>
+    <circle cx="200" cy="800" r="20" fill="#ffccaa"/>
+    <circle cx="800" cy="850" r="25" fill="#aaccff"/>
+  </g>
+
+  <!-- Steam/smoke rising from grill (foreground effect, volumetric simulation) -->
+  <g filter="url(#fSteamEffect)" opacity="0.4">
+    <path d="M500 580 C450 500 550 500 500 450 Z" fill="white" transform="translate(0, -10)"/>
+    <path d="M480 570 C430 490 530 490 480 440 Z" fill="white" transform="translate(-20, -15) rotate(5)" opacity="0.8"/>
+    <path d="M520 590 C470 510 570 510 520 460 Z" fill="white" transform="translate(20, -5) rotate(-3)" opacity="0.6"/>
+  </g>
+
+  <!-- More small details for density and realism (macro-photography style) -->
+  <g id="tinyDetails">
+    <!-- Droplets/splashes on counter -->
+    <circle cx="320" cy="650" r="2" fill="#8B4513" opacity="0.6"/>
+    <circle cx="330" cy="655" r="1.5" fill="#8B0000" opacity="0.5"/>
+    <circle cx="700" cy="680" r="1.8" fill="rgba(255,255,255,0.7)" opacity="0.4"/>
+    <!-- Small food bits around grill -->
+    <rect x="370" y="605" width="3" height="3" fill="#A02020" opacity="0.7"/>
+    <rect x="410" y="600" width="2" height="2" fill="#CD5C5C" opacity="0.6"/>
+    <rect x="450" y="610" width="4" height="2" fill="#8B4513" opacity="0.8"/>
+    <!-- Slight texture on counter edge -->
+    <path d="M120 620 L125 620 L125 630 L120 630 Z" fill="#603000" opacity="0.3"/>
+    <path d="M890 620 L895 620 L895 630 L890 630 Z" fill="#603000" opacity="0.3"/>
+    <path d="M350 595 L360 595 L355 600 Z" fill="#FFD700" opacity="0.6"/> <!-- Small spice fragment -->
+    <circle cx="600" cy="598" r="1" fill="#FF4500" opacity="0.7"/> <!-- Charcoal ember simulation -->
+  </g>
+
+  <!-- Final touch: subtle overall grain/noise for photographic feel -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#pAsphaltTexture)" opacity="0.02"/>
+
+</svg>

@@ -1,0 +1,284 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="f-bokeh" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur-heavy"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur-medium"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur-light"/>
+    </filter>
+    <filter id="f-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="glow-blur"/>
+      <feFlood flood-color="white" flood-opacity="0.8" result="flood"/>
+      <feComposite in="flood" in2="glow-blur" operator="in" result="glow-color"/>
+      <feBlend in="SourceGraphic" in2="glow-color" mode="screen"/>
+    </filter>
+    <filter id="f-deep-glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="f-volumetric">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.7 0"/>
+    </filter>
+    <linearGradient id="g-titanium-main" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3A3F45"/>
+      <stop offset="20%" stop-color="#4F555D"/>
+      <stop offset="50%" stop-color="#60666E"/>
+      <stop offset="80%" stop-color="#4F555D"/>
+      <stop offset="100%" stop-color="#3A3F45"/>
+    </linearGradient>
+    <linearGradient id="g-titanium-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#303438"/>
+      <stop offset="30%" stop-color="#40454B"/>
+      <stop offset="70%" stop-color="#40454B"/>
+      <stop offset="100%" stop-color="#303438"/>
+    </linearGradient>
+    <radialGradient id="g-display-oled" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="g-electric-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00CCFF" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#00CCFF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00CCFF" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="g-liquid-mesh-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C0C0C0"/>
+      <stop offset="25%" stop-color="#E0E0E0"/>
+      <stop offset="50%" stop-color="#F0F0F0"/>
+      <stop offset="75%" stop-color="#E0E0E0"/>
+      <stop offset="100%" stop-color="#C0C0C0"/>
+    </linearGradient>
+    <linearGradient id="g-liquid-mesh-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#606060"/>
+      <stop offset="25%" stop-color="#808080"/>
+      <stop offset="50%" stop-color="#909090"/>
+      <stop offset="75%" stop-color="#808080"/>
+      <stop offset="100%" stop-color="#606060"/>
+    </linearGradient>
+    <radialGradient id="g-bokeh-blue" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#00BFFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00BFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-bokeh-purple" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#8A2BE2" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#8A2BE2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-bokeh-green" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#32CD32" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#32CD32" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-volumetric-light" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="g-rim-light" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="20%" stop-color="rgba(255,255,255,0.7)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,1)"/>
+      <stop offset="80%" stop-color="rgba(255,255,255,0.7)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <radialGradient id="g-ceramic-reflection" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
+      <stop offset="60%" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <clipPath id="clip-watch-body">
+      <path d="M 320 250 Q 300 250 290 270 L 250 500 Q 240 520 260 530 L 270 535 L 750 545 Q 770 545 780 525 L 820 295 Q 830 275 810 265 L 800 260 L 320 250 Z"/>
+    </clipPath>
+    <clipPath id="clip-watch-display">
+      <path d="M 350 280 Q 335 280 325 295 L 295 480 Q 285 495 300 505 L 720 525 Q 735 525 745 510 L 775 325 Q 785 310 770 300 L 760 295 L 350 280 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background: Softly diffused bokeh of subtle neon tech lights -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#101015"/>
+  <g filter="url(#f-bokeh)">
+    <circle cx="200" cy="150" r="120" fill="url(#g-bokeh-blue)" opacity="0.4"/>
+    <circle cx="850" cy="100" r="100" fill="url(#g-bokeh-purple)" opacity="0.3"/>
+    <circle cx="150" cy="900" r="150" fill="url(#g-bokeh-green)" opacity="0.35"/>
+    <circle cx="700" cy="800" r="130" fill="url(#g-bokeh-blue)" opacity="0.3"/>
+    <circle cx="500" cy="50" r="80" fill="url(#g-bokeh-purple)" opacity="0.25"/>
+    <circle cx="950" cy="500" r="110" fill="url(#g-bokeh-green)" opacity="0.4"/>
+    <circle cx="300" cy="700" r="90" fill="url(#g-bokeh-blue)" opacity="0.2"/>
+  </g>
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#g-volumetric-light)" filter="url(#f-volumetric)"/>
+
+  <!-- Watch Body (Brushed dark grey titanium alloy) -->
+  <g clip-path="url(#clip-watch-body)">
+    <path d="M 320 250 Q 300 250 290 270 L 250 500 Q 240 520 260 530 L 270 535 L 750 545 Q 770 545 780 525 L 820 295 Q 830 275 810 265 L 800 260 L 320 250 Z" fill="url(#g-titanium-main)"/>
+    <!-- Brushed texture simulation with fine lines and subtle gradient shifts -->
+    <g opacity="0.1">
+      <line x1="300" y1="260" x2="800" y2="280" stroke="#707075" stroke-width="0.5"/>
+      <line x1="290" y1="270" x2="790" y2="290" stroke="#707075" stroke-width="0.5"/>
+      <line x1="280" y1="280" x2="780" y2="300" stroke="#707075" stroke-width="0.5"/>
+      <line x1="270" y1="290" x2="770" y2="310" stroke="#707075" stroke-width="0.5"/>
+      <line x1="260" y1="300" x2="760" y2="320" stroke="#707075" stroke-width="0.5"/>
+      <line x1="255" y1="310" x2="755" y2="330" stroke="#707075" stroke-width="0.5"/>
+      <line x1="250" y1="320" x2="750" y2="340" stroke="#707075" stroke-width="0.5"/>
+      <line x1="245" y1="330" x2="745" y2="350" stroke="#707075" stroke-width="0.5"/>
+      <line x1="240" y1="340" x2="740" y2="360" stroke="#707075" stroke-width="0.5"/>
+      <line x1="235" y1="350" x2="735" y2="370" stroke="#707075" stroke-width="0.5"/>
+    </g>
+    <!-- Highlight reflections for titanium -->
+    <path d="M 330 260 L 790 280 L 785 285 L 325 265 Z" fill="rgba(255,255,255,0.15)"/>
+    <path d="M 300 500 L 720 520 L 715 525 L 295 505 Z" fill="rgba(255,255,255,0.1)"/>
+  </g>
+
+  <!-- Polished black ceramic details (bezel and buttons if visible) -->
+  <path d="M 335 270 Q 315 270 305 290 L 265 490 Q 255 510 275 520 L 735 530 Q 755 530 765 510 L 805 305 Q 815 285 795 275 L 785 270 L 335 270 Z" fill="#1A1A1A"/>
+  <!-- Ceramic reflections -->
+  <path d="M 350 280 Q 335 280 325 295 L 295 480 Q 285 495 300 505 L 720 525 Q 735 525 745 510 L 775 325 Q 785 310 770 300 L 760 295 L 350 280 Z" fill="url(#g-ceramic-reflection)"/>
+  <path d="M 360 285 L 760 300 L 755 305 L 355 290 Z" fill="rgba(255,255,255,0.1)"/>
+
+  <!-- Luminescent electric blue accent lines (subtle, integrated) -->
+  <path d="M 310 260 L 270 490 L 280 500 L 740 520 L 750 510 L 790 280 L 780 270 L 310 260 Z" fill="none" stroke="url(#g-electric-blue)" stroke-width="2" filter="url(#f-glow)"/>
+
+  <!-- Edge-to-edge, seamlessly curved OLED display -->
+  <g clip-path="url(#clip-watch-display)">
+    <path d="M 350 280 Q 335 280 325 295 L 295 480 Q 285 495 300 505 L 720 525 Q 735 525 745 510 L 775 325 Q 785 310 770 300 L 760 295 L 350 280 Z" fill="url(#g-display-oled)"/>
+    <!-- Display overlay/curvature effect -->
+    <path d="M 350 280 Q 335 280 325 295 L 295 480 Q 285 495 300 505 L 720 525 Q 735 525 745 510 L 775 325 Q 785 310 770 300 L 760 295 L 350 280 Z" fill="rgba(0,0,0,0.4)" stroke="rgba(0,0,0,0.8)" stroke-width="0.5"/>
+    <rect x="300" y="290" width="470" height="220" fill="rgba(0,0,0,0.2)"/>
+    <!-- Holographic interface: Intricate real-time data & animated biometric indicators -->
+    <g transform="translate(0, -10)" opacity="0.8">
+      <!-- Main Data Area -->
+      <text x="360" y="350" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="40" fill="#00FFFF" filter="url(#f-glow)">14:37</text>
+      <text x="500" y="350" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#00FF7F">WED, NOV 22</text>
+
+      <!-- Heart Rate (Biometric) -->
+      <path d="M 360 380 L 380 380 L 390 370 L 400 390 L 410 375 L 420 380 L 430 380" stroke="#FF4500" stroke-width="3" fill="none" filter="url(#f-glow)"/>
+      <text x="440" y="385" font-family="Segoe UI, Helvetica, Arial, sans-size" font-size="22" fill="#FF4500">72 BPM</text>
+      <path d="M 470 380 A 10 10 0 1 1 470 380.001" fill="#FF4500" stroke="#FF4500" stroke-width="1.5" filter="url(#f-glow)">
+        <animateTransform attributeName="transform" type="rotate" from="0 470 380" to="360 470 380" dur="2s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Steps/Activity -->
+      <path d="M 360 410 L 375 405 L 390 415 L 405 400 L 420 410" stroke="#FFFF00" stroke-width="3" fill="none" filter="url(#f-glow)"/>
+      <text x="440" y="415" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" fill="#FFFF00">8,450 Steps</text>
+
+      <!-- Weather -->
+      <path d="M 360 440 C 360 430 370 430 370 440 L 380 440 L 380 430 C 380 420 390 420 390 430 L 390 440 Z" fill="#ADD8E6" filter="url(#f-glow)"/>
+      <circle cx="375" cy="430" r="8" fill="#ADD8E6" filter="url(#f-glow)"/>
+      <text x="395" y="445" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" fill="#ADD8E6">24°C Sunny</text>
+
+      <!-- Notifications / Status Rings -->
+      <circle cx="650" cy="380" r="35" stroke="#444" stroke-width="5" fill="none"/>
+      <path d="M 650 345 A 35 35 0 1 1 650 415 A 35 35 0 0 1 650 345" stroke="#00FF7F" stroke-width="5" fill="none" filter="url(#f-glow)"/>
+      <text x="635" y="387" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#00FF7F">90%</text>
+
+      <circle cx="600" cy="450" r="25" stroke="#444" stroke-width="4" fill="none"/>
+      <path d="M 600 425 A 25 25 0 1 1 600 475 A 25 25 0 0 1 600 425" stroke="#00BFFF" stroke-width="4" fill="none" filter="url(#f-glow)"/>
+      <text x="588" y="457" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" fill="#00BFFF">65%</text>
+
+      <circle cx="700" cy="450" r="25" stroke="#444" stroke-width="4" fill="none"/>
+      <path d="M 700 425 A 25 25 0 0 1 700 475 A 25 25 0 0 1 700 425" stroke="#FFD700" stroke-width="4" fill="none" filter="url(#f-glow)"/>
+      <text x="688" y="457" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" fill="#FFD700">75%</text>
+
+      <!-- Dynamic Data Visualization -->
+      <g transform="translate(0, 40)">
+        <path d="M350 450 Q 380 430 410 450 Q 440 470 470 450 Q 500 430 530 450" fill="none" stroke="#9932CC" stroke-width="2" opacity="0.7" filter="url(#f-glow)">
+          <animate attributeName="d" dur="5s" repeatCount="indefinite"
+            values="M350 450 Q 380 430 410 450 Q 440 470 470 450 Q 500 430 530 450;
+                    M350 440 Q 380 460 410 440 Q 440 420 470 440 Q 500 460 530 440;
+                    M350 450 Q 380 430 410 450 Q 440 470 470 450 Q 500 430 530 450"/>
+        </path>
+        <path d="M350 460 Q 380 440 410 460 Q 440 480 470 460 Q 500 440 530 460" fill="none" stroke="#87CEEB" stroke-width="2" opacity="0.7" filter="url(#f-glow)">
+          <animate attributeName="d" dur="6s" repeatCount="indefinite"
+            values="M350 460 Q 380 440 410 460 Q 440 480 470 460 Q 500 440 530 460;
+                    M350 450 Q 380 470 410 450 Q 440 430 470 450 Q 500 470 530 450;
+                    M350 460 Q 380 440 410 460 Q 440 480 470 460 Q 500 440 530 460"/>
+        </path>
+      </g>
+    </g>
+    <!-- Display reflections/glare -->
+    <path d="M 370 290 Q 400 280 430 285 L 430 295 Q 400 290 370 300 Z" fill="rgba(255,255,255,0.1)"/>
+    <path d="M 700 300 Q 730 290 760 300 L 755 310 Q 725 300 695 305 Z" fill="rgba(255,255,255,0.08)"/>
+  </g>
+
+  <!-- Strap: Integrated, self-adjusting liquid metal mesh -->
+  <g transform="rotate(10 300 550)">
+    <path d="M 270 535 Q 260 550 250 590 L 230 750 Q 220 790 250 810 L 300 830 Q 330 840 350 800 L 370 650 Q 380 600 370 560 L 360 540 Z" fill="url(#g-liquid-mesh-dark)"/>
+    <!-- Mesh texture simulation -->
+    <g transform="translate(0, 0)" opacity="0.6">
+      <rect x="235" y="550" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 235 550)"/>
+      <rect x="245" y="560" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 245 560)"/>
+      <rect x="255" y="570" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 255 570)"/>
+      <rect x="265" y="580" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 265 580)"/>
+      <rect x="275" y="590" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 275 590)"/>
+      <rect x="285" y="600" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 285 600)"/>
+      <rect x="295" y="610" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 295 610)"/>
+      <rect x="305" y="620" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 305 620)"/>
+      <rect x="315" y="630" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 315 630)"/>
+      <rect x="325" y="640" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 325 640)"/>
+      <rect x="335" y="650" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 335 650)"/>
+      <rect x="345" y="660" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 345 660)"/>
+      <rect x="355" y="670" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 355 670)"/>
+      <rect x="365" y="680" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 365 680)"/>
+
+      <rect x="240" y="555" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 240 555)"/>
+      <rect x="250" y="565" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 250 565)"/>
+      <rect x="260" y="575" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 260 575)"/>
+      <rect x="270" y="585" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 270 585)"/>
+      <rect x="280" y="595" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 280 595)"/>
+      <rect x="290" y="605" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 290 605)"/>
+      <rect x="300" y="615" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 300 615)"/>
+      <rect x="310" y="625" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 310 625)"/>
+      <rect x="320" y="635" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 320 635)"/>
+      <rect x="330" y="645" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 330 645)"/>
+      <rect x="340" y="655" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 340 655)"/>
+      <rect x="350" y="665" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 350 665)"/>
+      <rect x="360" y="675" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(10 360 675)"/>
+    </g>
+    <!-- Liquid metal reflections on strap -->
+    <path d="M 260 560 Q 250 570 240 620 Q 235 650 240 680 L 250 710 Q 260 740 280 750 L 290 755 Q 300 760 310 750 L 320 740 Q 330 730 340 700 L 350 670 Q 360 640 360 600 L 350 570 Q 340 540 330 540 Z" fill="rgba(255,255,255,0.1)" filter="url(#f-bokeh)"/>
+  </g>
+
+  <g transform="rotate(-15 750 550)">
+    <path d="M 750 545 Q 770 545 780 525 L 820 295 Q 830 275 810 265 L 800 260 L 750 545 Z" fill="url(#g-titanium-side)" opacity="0"/>
+    <path d="M 750 545 Q 770 555 780 595 L 800 755 Q 810 795 780 815 L 730 835 Q 700 845 680 805 L 660 655 Q 650 605 660 565 L 670 545 Z" fill="url(#g-liquid-mesh-dark)"/>
+    <!-- Mesh texture simulation -->
+    <g transform="translate(0, 0)" opacity="0.6">
+      <rect x="660" y="550" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 660 550)"/>
+      <rect x="670" y="560" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 670 560)"/>
+      <rect x="680" y="570" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 680 570)"/>
+      <rect x="690" y="580" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 690 580)"/>
+      <rect x="700" y="590" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 700 590)"/>
+      <rect x="710" y="600" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 710 600)"/>
+      <rect x="720" y="610" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 720 610)"/>
+      <rect x="730" y="620" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 730 620)"/>
+      <rect x="740" y="630" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 740 630)"/>
+      <rect x="750" y="640" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 750 640)"/>
+      <rect x="760" y="650" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 760 650)"/>
+      <rect x="770" y="660" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 770 660)"/>
+
+      <rect x="665" y="555" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 665 555)"/>
+      <rect x="675" y="565" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 675 565)"/>
+      <rect x="685" y="575" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 685 575)"/>
+      <rect x="695" y="585" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 695 585)"/>
+      <rect x="705" y="595" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 705 595)"/>
+      <rect x="715" y="605" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 715 605)"/>
+      <rect x="725" y="615" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 725 615)"/>
+      <rect x="735" y="625" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 735 625)"/>
+      <rect x="745" y="635" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 745 635)"/>
+      <rect x="755" y="645" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 755 645)"/>
+      <rect x="765" y="655" width="10" height="20" fill="url(#g-liquid-mesh-light)" transform="rotate(-15 765 655)"/>
+    </g>
+    <!-- Liquid metal reflections on strap -->
+    <path d="M 680 565 Q 670 575 660 625 Q 655 655 660 685 L 670 715 Q 680 745 700 755 L 710 760 Q 720 765 730 755 L 740 745 Q 750 735 760 705 L 770 675 Q 780 645 780 605 L 770 575 Q 760 545 750 545 Z" fill="rgba(255,255,255,0.1)" filter="url(#f-bokeh)"/>
+  </g>
+
+
+  <!-- Rim light highlighting the watch's contours -->
+  <path d="M 320 250 Q 300 250 290 270 L 250 500 Q 240 520 260 530 L 270 535 L 750 545 Q 770 545 780 525 L 820 295 Q 830 275 810 265 L 800 260 L 320 250 Z" fill="none" stroke="url(#g-rim-light)" stroke-width="3" filter="url(#f-deep-glow)" opacity="0.8"/>
+  <path d="M 350 280 Q 335 280 325 295 L 295 480 Q 285 495 300 505 L 720 525 Q 735 525 745 510 L 775 325 Q 785 310 770 300 L 760 295 L 350 280 Z" fill="none" stroke="url(#g-rim-light)" stroke-width="2" filter="url(#f-glow)" opacity="0.7"/>
+
+  <!-- Subtle light streaks for volumetric effect over the watch -->
+  <path d="M 200 100 L 400 0 L 410 20 L 210 120 Z" fill="rgba(255,255,255,0.05)" filter="url(#f-volumetric)"/>
+  <path d="M 800 50 L 1000 150 L 990 170 L 790 70 Z" fill="rgba(255,255,255,0.04)" filter="url(#f-volumetric)"/>
+  <path d="M 100 400 L 200 300 L 210 320 L 110 420 Z" fill="rgba(255,255,255,0.03)" filter="url(#f-volumetric)"/>
+
+</svg>

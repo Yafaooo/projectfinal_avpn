@@ -3,25 +3,177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot AI Gemini</title>
+  <title>YAFAO AI STUDIO — Pro Creative Platform</title>
+  <meta name="description" content="YAFAO AI Studio Pro - Platform kecerdasan buatan terdepan untuk tanya jawab, pembuatan gambar, video, dan pengeditan kreatif.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>Chatbot AI Gemini</h1>
-    
-    <div id="chat-box" class="chat-box"></div>
-    
-    <form id="chat-form" class="chat-form">
-      <input 
-        type="text" 
-        id="user-input" 
-        placeholder="Ketik pesan Anda di sini..." 
-        autocomplete="off"
-      />
-      <button type="submit">Kirim</button>
-    </form>
+
+  <!-- ═══════════════════ SPLASH SCREEN ═══════════════════ -->
+  <div id="splash-screen" class="splash-screen">
+    <!-- Animated particles background -->
+    <div class="splash-particles" id="splash-particles"></div>
+    <div class="splash-content">
+      <div class="splash-logo-wrap">
+        <div class="splash-ring"></div>
+        <div class="splash-ring ring-2"></div>
+        <div class="splash-ring ring-3"></div>
+        <svg class="splash-core-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#f472b6"/>
+            </linearGradient>
+          </defs>
+          <polygon points="50,5 61,35 95,35 68,55 78,88 50,68 22,88 32,55 5,35 39,35" fill="url(#core-grad)" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="splash-text-block">
+        <h1 class="splash-title">YAFAO AI STUDIO</h1>
+        <div class="splash-divider"></div>
+        <p class="splash-tagline">Inisiasi Kecerdasan Tanpa Batas...</p>
+        <p class="splash-caption">SEMUA PERTANYAANMU DAN APAPUN YANG KAMU CARI<br>BISA DIJAWAB OLEH YAFAO AI SUPPORT</p>
+      </div>
+      <div class="splash-loader">
+        <div class="splash-loader-track">
+          <div class="splash-loader-fill"></div>
+        </div>
+        <span class="splash-loader-text">INITIALIZING NEURAL CORE...</span>
+      </div>
+    </div>
   </div>
+
+  <!-- ═══════════════════ HUD OVERLAY ═══════════════════ -->
+  <div class="hud-scanline"></div>
+  <div class="hud-grid-bg"></div>
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-mark">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="logo-svg-main">
+          <defs>
+            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+          <polygon points="20,2 25,14 38,14 28,22 32,36 20,28 8,36 12,22 2,14 15,14" fill="none" stroke="url(#lg1)" stroke-width="1.5"/>
+          <polygon points="20,8 23,16 32,16 25,21 28,30 20,24 12,30 15,21 8,16 17,16" fill="url(#lg1)" opacity="0.6"/>
+        </svg>
+        <span class="logo-text">YAFAO<span class="logo-accent">AI</span></span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="status-chip" id="api-status">
+        <span class="status-dot"></span>
+        <span class="status-label">SYSTEM: INITIALIZING</span>
+      </div>
+      <button class="hud-btn" title="Pengaturan" id="btn-settings"><i class="fas fa-sliders"></i></button>
+      <div class="avatar-ring">
+        <div class="avatar-inner">Y</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ MAIN STAGE ═══════════════════ -->
+  <main class="main-stage">
+
+    <!-- Hero Welcome -->
+    <div id="hero-section" class="hero-section">
+      <div class="hero-badge">NEURAL ENGINE v3.0 — ACTIVE</div>
+      <h1 class="hero-title">
+        <span class="hero-line-1">Selamat Datang,</span>
+        <span class="hero-line-2">YAFAO MABE</span>
+      </h1>
+      <p class="hero-subtitle">Tanyakan apapun. Buat apapun. Tanpa batas.</p>
+      <div class="hero-chips">
+        <span class="hero-chip"><i class="fas fa-brain"></i> Smart Chat</span>
+        <span class="hero-chip"><i class="fas fa-image"></i> Image Gen</span>
+        <span class="hero-chip"><i class="fas fa-film"></i> Video Gen</span>
+        <span class="hero-chip"><i class="fas fa-wand-magic-sparkles"></i> Canvas Edit</span>
+      </div>
+    </div>
+
+    <!-- Chat Stream -->
+    <div class="chat-container" id="chat-container">
+      <div class="chat-messages" id="chat-messages"></div>
+    </div>
+
+    <!-- Console Input -->
+    <div class="console-wrapper" id="input-wrapper">
+      <div class="console-panel">
+
+        <!-- Preview -->
+        <div id="chat-img-preview" class="console-preview">
+          <img id="chat-img-thumb" src="">
+          <button id="btn-remove-chat-img" class="preview-remove"><i class="fas fa-xmark"></i></button>
+        </div>
+
+        <div class="console-row">
+          <!-- Action Menu -->
+          <div class="action-menu-wrapper">
+            <button class="console-action-btn" id="btn-open-menu">
+              <i class="fas fa-plus"></i>
+            </button>
+            <div class="action-menu-popover" id="action-menu">
+              <div class="menu-header">YAFAO TOOLS</div>
+              <label for="chat-upload" class="menu-item">
+                <div class="menu-icon"><i class="fas fa-paperclip"></i></div>
+                <div class="menu-label">Upload file<span class="menu-desc">Lampirkan gambar untuk dianalisis</span></div>
+              </label>
+              <input type="file" id="chat-upload" hidden accept="image/*">
+              <div class="menu-item" data-mode="image">
+                <div class="menu-icon"><i class="fas fa-sparkles"></i></div>
+                <div class="menu-label">Buat gambar<span class="menu-desc">Generate gambar dari teks</span></div>
+              </div>
+              <div class="menu-item" data-mode="video">
+                <div class="menu-icon"><i class="fas fa-clapperboard"></i></div>
+                <div class="menu-label">Buat video<span class="menu-desc">Render video AI sinematik</span></div>
+                <span class="menu-badge">NEW</span>
+              </div>
+              <div class="menu-item" data-mode="edit">
+                <div class="menu-icon"><i class="fas fa-pen-ruler"></i></div>
+                <div class="menu-label">Canvas Edit<span class="menu-desc">Edit gambar dengan AI</span></div>
+              </div>
+              <div class="menu-divider"></div>
+              <div class="menu-item menu-danger" id="btn-clear-chat">
+                <div class="menu-icon"><i class="fas fa-trash-can"></i></div>
+                <div class="menu-label">Bersihkan Chat</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mode Tag -->
+          <div id="mode-indicator" class="mode-tag" style="display:none;">
+            <span id="mode-text">Chat AI</span>
+            <i class="fas fa-xmark" id="btn-reset-mode"></i>
+          </div>
+
+          <textarea class="console-input" id="chat-input" placeholder="Ketik perintah atau jatuhkan file di sini..." rows="1"></textarea>
+
+          <button class="console-send" id="btn-send-chat">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+        </div>
+      </div>
+      <div class="console-footer">
+        YAFAO AI Studio Pro &mdash; Dibuat dengan ❤️ oleh Yafao. Hasil AI dapat mengandung ketidakakuratan.
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" onclick="document.getElementById('lightbox').style.display='none'">&times;</button>
+    <div id="lightbox-content" class="lightbox-content"></div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast-container" class="toast-container"></div>
 
   <script src="script.js"></script>
 </body>

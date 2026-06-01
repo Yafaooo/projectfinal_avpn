@@ -1,0 +1,179 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="skyGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:hsl(200, 70%, 95%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(220, 50%, 80%);stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="forestGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(90, 30%, 75%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(100, 20%, 65%);stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="floorGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:hsl(30, 45%, 65%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(30, 35%, 55%);stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="catBodyLight" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:hsl(30, 70%, 95%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(30, 60%, 90%);stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="catBodyShadow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:hsl(30, 40%, 80%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(30, 60%, 90%);stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="eyeGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:hsl(140, 70%, 55%);" />
+      <stop offset="100%" style="stop-color:hsl(140, 50%, 35%);" />
+    </radialGradient>
+    <linearGradient id="whiskerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#333" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#555" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="sunlightGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:hsl(45, 100%, 90%);stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:hsl(45, 80%, 95%);stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background: Ghibli-esque forest through a window -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#E0F2F7"/> <!-- Base sky color -->
+
+  <g transform="translate(0, -100)">
+    <rect x="0" y="0" width="1024" height="600" fill="url(#skyGradient)"/>
+    <!-- Distant hills/forest layers -->
+    <path d="M0 600 Q200 500 400 550 C600 600 800 520 1024 580 V600 H0 Z" fill="hsl(100, 25%, 50%)" stroke="#6C877D" stroke-width="2"/>
+    <path d="M0 600 Q150 480 350 520 C550 580 750 490 1024 550 V600 H0 Z" fill="hsl(95, 30%, 60%)" stroke="#7A9C8F" stroke-width="2"/>
+    <path d="M0 600 Q100 450 300 480 C500 550 700 460 1024 520 V600 H0 Z" fill="url(#forestGradient)" stroke="#8EB1A3" stroke-width="2"/>
+    <path d="M0 580 Q120 420 320 450 C520 520 720 430 1024 490 V580 H0 Z" fill="hsl(90, 35%, 65%)" stroke="#9BBCAE" stroke-width="2"/>
+  </g>
+
+  <!-- Wooden floor -->
+  <rect x="0" y="600" width="1024" height="424" fill="url(#floorGradient)"/>
+  <!-- Floor wood grain details -->
+  <path d="M0 620 L1024 620" stroke="#754E3A" stroke-width="2" opacity="0.4"/>
+  <path d="M0 680 Q200 670 400 690 T800 700 T1024 710" stroke="#754E3A" stroke-width="2" opacity="0.4"/>
+  <path d="M0 750 L1024 760" stroke="#754E3A" stroke-width="2" opacity="0.4"/>
+  <path d="M0 820 Q300 810 600 830 T1024 840" stroke="#754E3A" stroke-width="2" opacity="0.4"/>
+  <path d="M0 890 L1024 900" stroke="#754E3A" stroke-width="2" opacity="0.4"/>
+  <path d="M0 960 Q200 950 500 970 T1024 980" stroke="#754E3A" stroke-width="2" opacity="0.4"/>
+
+  <!-- Sunlight effect on floor -->
+  <ellipse cx="700" cy="780" rx="300" ry="150" fill="url(#sunlightGlow)" transform="rotate(-15 700 780)"/>
+
+  <!-- Cat sitting in foreground -->
+  <g transform="translate(300, 350)">
+    <!-- Cat body - main shape -->
+    <path d="M150 250 C 50 200 0 400 150 450 L200 450 C350 400 400 200 300 250 Z" fill="url(#catBodyLight)" stroke="#503020" stroke-width="3"/>
+    <!-- Left front leg -->
+    <path d="M140 400 C100 450 120 500 160 500 L180 470 Z" fill="url(#catBodyLight)" stroke="#503020" stroke-width="3"/>
+    <!-- Right front leg (partially obscured) -->
+    <path d="M260 400 C300 450 280 500 240 500 L220 470 Z" fill="url(#catBodyLight)" stroke="#503020" stroke-width="3"/>
+    <!-- Cat tail -->
+    <path d="M350 350 C400 400 450 480 400 550 C350 620 250 650 150 600 C100 550 100 450 150 400 C200 350 300 300 350 350 Z" fill="url(#catBodyShadow)" stroke="#503020" stroke-width="3"/>
+
+    <!-- Cat head -->
+    <path d="M200 200 C100 100 100 300 200 300 C300 300 300 100 200 200 Z" fill="url(#catBodyLight)" stroke="#503020" stroke-width="4"/>
+    <!-- Left ear -->
+    <path d="M140 100 L180 50 L220 100 Z" fill="url(#catBodyLight)" stroke="#503020" stroke-width="3"/>
+    <path d="M160 80 L180 70 L200 80 Z" fill="hsl(350, 70%, 85%)" stroke="#503020" stroke-width="1.5"/>
+    <!-- Right ear -->
+    <path d="M220 100 L260 50 L300 100 Z" fill="url(#catBodyLight)" stroke="#503020" stroke-width="3"/>
+    <path d="M240 80 L260 70 L280 80 Z" fill="hsl(350, 70%, 85%)" stroke="#503020" stroke-width="1.5"/>
+
+    <!-- Eyes -->
+    <ellipse cx="160" cy="200" rx="25" ry="30" fill="url(#eyeGradient)" stroke="#503020" stroke-width="2"/>
+    <ellipse cx="240" cy="200" rx="25" ry="30" fill="url(#eyeGradient)" stroke="#503020" stroke-width="2"/>
+    <!-- Pupils -->
+    <ellipse cx="160" cy="205" rx="8" ry="18" fill="#3A534B"/>
+    <ellipse cx="240" cy="205" rx="8" ry="18" fill="#3A534B"/>
+    <!-- Eye highlights -->
+    <circle cx="150" cy="190" r="5" fill="white" opacity="0.8"/>
+    <circle cx="170" cy="195" r="3" fill="white" opacity="0.6"/>
+    <circle cx="230" cy="190" r="5" fill="white" opacity="0.8"/>
+    <circle cx="250" cy="195" r="3" fill="white" opacity="0.6"/>
+
+    <!-- Nose -->
+    <path d="M200 230 C190 240 210 240 200 230 Z" fill="hsl(350, 70%, 85%)" stroke="#503020" stroke-width="1.5"/>
+    <!-- Mouth -->
+    <path d="M200 240 C190 250 190 260 200 260 C210 260 210 250 200 240 Z" fill="none" stroke="#503020" stroke-width="1.5"/>
+    <!-- Mouth curve -->
+    <path d="M190 255 C195 260 205 260 210 255" fill="none" stroke="#503020" stroke-width="1.5"/>
+
+    <!-- Whiskers -->
+    <path d="M150 240 Q100 230 80 220" stroke="url(#whiskerGradient)" stroke-width="1.5"/>
+    <path d="M155 245 Q100 250 80 250" stroke="url(#whiskerGradient)" stroke-width="1.5"/>
+    <path d="M150 250 Q100 260 80 270" stroke="url(#whiskerGradient)" stroke-width="1.5"/>
+    <path d="M250 240 Q300 230 320 220" stroke="url(#whiskerGradient)" stroke-width="1.5"/>
+    <path d="M245 245 Q300 250 320 250" stroke="url(#whiskerGradient)" stroke-width="1.5"/>
+    <path d="M250 250 Q300 260 320 270" stroke="url(#whiskerGradient)" stroke-width="1.5"/>
+
+    <!-- Subtle fur texture/shadows on face -->
+    <path d="M180 270 C190 265 210 265 220 270" fill="none" stroke="#503020" stroke-width="0.8" opacity="0.3"/>
+    <path d="M170 170 Q180 160 200 165" fill="none" stroke="#503020" stroke-width="0.8" opacity="0.3"/>
+    <path d="M230 170 Q220 160 200 165" fill="none" stroke="#503020" stroke-width="0.8" opacity="0.3"/>
+  </g>
+
+  <!-- Foreground cherry blossoms and leaves -->
+  <g transform="translate(0, 50)" opacity="0.9">
+    <!-- Branch -->
+    <path d="M0 450 Q150 400 250 450 Q300 480 350 400 Q400 350 450 400" fill="none" stroke="#6F4F42" stroke-width="8" stroke-linecap="round"/>
+    <!-- Individual blossoms and leaves (many elements for density) -->
+    <!-- Blossom 1 -->
+    <g transform="translate(200, 380) scale(0.7)">
+      <circle cx="0" cy="-10" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="10" cy="0" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="0" cy="10" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="-10" cy="0" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="5" fill="hsl(300, 70%, 70%)"/>
+    </g>
+    <!-- Blossom 2 -->
+    <g transform="translate(300, 350) scale(0.6)">
+      <circle cx="0" cy="-10" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="10" cy="0" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="0" cy="10" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="-10" cy="0" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="5" fill="hsl(300, 70%, 70%)"/>
+    </g>
+    <!-- Blossom 3 -->
+    <g transform="translate(400, 390) scale(0.8)">
+      <circle cx="0" cy="-10" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="10" cy="0" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="0" cy="10" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="-10" cy="0" r="15" fill="hsl(340, 80%, 90%)" stroke="hsl(340, 60%, 80%)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="5" fill="hsl(300, 70%, 70%)"/>
+    </g>
+    <!-- Small falling petals -->
+    <ellipse cx="100" cy="400" rx="4" ry="8" fill="hsl(340, 80%, 90%)" transform="rotate(30 100 400)"/>
+    <ellipse cx="250" cy="300" rx="3" ry="6" fill="hsl(340, 80%, 90%)" transform="rotate(60 250 300)"/>
+    <ellipse cx="350" cy="320" rx="5" ry="10" fill="hsl(340, 80%, 90%)" transform="rotate(10 350 320)"/>
+    <ellipse cx="50" cy="480" rx="3" ry="7" fill="hsl(340, 80%, 90%)" transform="rotate(-40 50 480)"/>
+    
+    <!-- Leaves (some behind the branch, some in front) -->
+    <path d="M220 440 Q230 430 240 440 L230 450 Z" fill="hsl(100, 40%, 70%)" stroke="hsl(100, 30%, 60%)" stroke-width="1"/>
+    <path d="M280 410 Q290 400 300 410 L290 420 Z" fill="hsl(100, 40%, 70%)" stroke="hsl(100, 30%, 60%)" stroke-width="1"/>
+    <path d="M380 430 Q390 420 400 430 L390 440 Z" fill="hsl(100, 40%, 70%)" stroke="hsl(100, 30%, 60%)" stroke-width="1"/>
+  </g>
+
+  <!-- More subtle background details - clouds/mist -->
+  <g opacity="0.4" transform="translate(0, -100)">
+    <ellipse cx="200" cy="250" rx="100" ry="50" fill="white"/>
+    <ellipse cx="800" cy="300" rx="120" ry="60" fill="white"/>
+    <ellipse cx="450" cy="200" rx="80" ry="40" fill="white"/>
+  </g>
+
+  <!-- Dust motes / sparkles (small circles) -->
+  <circle cx="100" cy="700" r="2" fill="white" opacity="0.6"/>
+  <circle cx="250" cy="650" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="400" cy="720" r="2.5" fill="white" opacity="0.7"/>
+  <circle cx="600" cy="680" r="2" fill="white" opacity="0.6"/>
+  <circle cx="850" cy="750" r="1.8" fill="white" opacity="0.5"/>
+  <circle cx="150" cy="800" r="2" fill="white" opacity="0.6"/>
+  <circle cx="300" cy="850" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="500" cy="820" r="2.5" fill="white" opacity="0.7"/>
+  <circle cx="750" cy="790" r="2" fill="white" opacity="0.6"/>
+  <circle cx="900" cy="880" r="1.8" fill="white" opacity="0.5"/>
+  <circle cx="50" cy="550" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="950" cy="600" r="2" fill="white" opacity="0.6"/>
+  <circle cx="200" cy="500" r="1.8" fill="white" opacity="0.5"/>
+  <circle cx="700" cy="520" r="2.2" fill="white" opacity="0.7"/>
+
+</svg>
