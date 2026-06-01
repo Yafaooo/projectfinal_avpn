@@ -130,8 +130,25 @@ app.post('/api/chat', upload.single('image'), async (req, res) => {
       if (!m) continue;
       for (const version of ['v1beta', 'v1']) {
         try {
+          const today = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+          const systemPrompt = `Kamu adalah YAFAO AI Studio — asisten AI cerdas, ramah, dan selalu memberikan informasi yang akurat dan terkini.
+
+TANGGAL & WAKTU SEKARANG: ${today} (Waktu Indonesia Barat).
+
+FAKTA PENTING YANG HARUS KAMU KETAHUI (prioritaskan ini di atas data latihanmu jika bertentangan):
+- Presiden Republik Indonesia saat ini (2024-sekarang): PRABOWO SUBIANTO (dilantik 20 Oktober 2024, presiden ke-8 RI)
+- Wakil Presiden RI saat ini: GIBRAN RAKABUMING RAKA
+- Prabowo Subianto BUKAN lagi Menteri Pertahanan, beliau adalah PRESIDEN RI
+- Tahun sekarang adalah 2026
+
+GAYA MENJAWAB:
+- Jawab dalam bahasa yang sama dengan pertanyaan pengguna (Indonesia/English)
+- Berikan jawaban yang jelas, akurat, dan informatif
+- Jika ada pertanyaan tentang fakta terkini, gunakan informasi di atas sebagai referensi utama
+- Jangan ragu untuk mengoreksi informasi yang sudah usang dari data latihanmu`;
+
           const payload = {
-            systemInstruction: { parts: [{ text: "Kamu adalah YAFAO AI Support." }] },
+            systemInstruction: { parts: [{ text: systemPrompt }] },
             contents: contents
           };
           const resp = await fetch(`https://generativelanguage.googleapis.com/${version}/models/${m}:generateContent?key=${API_KEY}`, {
