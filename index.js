@@ -228,7 +228,12 @@ function generateAnimatedSVG(prompt) {
 </svg>`;
 }
 
-// (Route handled by Vercel Edge network in production)
+// ═══════════════════════════════════════════════════════════════════════════
+//  ROUTES: Serve index.html for root and any non-api paths
+// ═══════════════════════════════════════════════════════════════════════════
+app.get('/', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+});
 
 // ═══════════════════════════════════════════════════════════════════════════
 //  CHAT  (/api/chat)
